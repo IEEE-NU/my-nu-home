@@ -4,6 +4,16 @@
 	height: 100vh;
 }
 
+#two-pane {
+	/* The navbar is 56px tall. */
+	height: calc(100% - 56px);
+}
+
+#map {
+	height: 100%;
+}
+
 #listings {
-	flex-grow: 1;
+	max-height: 100%;
+	overflow: scroll;
 }

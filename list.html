@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<div class="whole-viewport">
-			<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-primary">
+			<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
 				<a class="navbar-brand" href="index.html">My NU Home</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>
@@ -25,12 +25,67 @@
 			    </ul>
 			  </div>
 			</nav>
-			<div class="row no-gutters" id="listings">
-				<div class="col-md" id="map">
-					Hi!
-				</div>
-				<div class="col-md" id="right" style="background-color: blue">
-					My name is...
+			<div class="row no-gutters" id="two-pane">
+				<div class="col-md" id="map"></div>
+				<div class="col-md" id="listings">
+					<div class="list-group">
+					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
+					    <div class="d-flex w-100 justify-content-between">
+					      <h5 class="mb-1">$1200</h5>
+					      <small>Jan 2018 - Mar 2018</small>
+					    </div>
+					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
+					    <small>Female Requested</small>
+					  </a>
+					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
+					    <div class="d-flex w-100 justify-content-between">
+					      <h5 class="mb-1">$1200</h5>
+					      <small>Jan 2018 - Mar 2018</small>
+					    </div>
+					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
+					    <small>Female Requested</small>
+					  </a>
+					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
+					    <div class="d-flex w-100 justify-content-between">
+					      <h5 class="mb-1">$1200</h5>
+					      <small>Jan 2018 - Mar 2018</small>
+					    </div>
+					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
+					    <small>Female Requested</small>
+					  </a>
+					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
+					    <div class="d-flex w-100 justify-content-between">
+					      <h5 class="mb-1">$1200</h5>
+					      <small>Jan 2018 - Mar 2018</small>
+					    </div>
+					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
+					    <small>Female Requested</small>
+					  </a>
+					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
+					    <div class="d-flex w-100 justify-content-between">
+					      <h5 class="mb-1">$1200</h5>
+					      <small>Jan 2018 - Mar 2018</small>
+					    </div>
+					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
+					    <small>Female Requested</small>
+					  </a>
+					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
+					    <div class="d-flex w-100 justify-content-between">
+					      <h5 class="mb-1">$1200</h5>
+					      <small>Jan 2018 - Mar 2018</small>
+					    </div>
+					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
+					    <small>Female Requested</small>
+					  </a>
+					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
+					    <div class="d-flex w-100 justify-content-between">
+					      <h5 class="mb-1">$1200</h5>
+					      <small>Jan 2018 - Mar 2018</small>
+					    </div>
+					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
+					    <small>Female Requested</small>
+					  </a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -39,8 +94,8 @@
       var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
+          center: {lat: 42.056228, lng: -87.677177},
+          zoom: 15
         });
       }
     </script>
