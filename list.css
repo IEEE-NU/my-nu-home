@@ -1,0 +1,9 @@
+.whole-viewport {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+#listings {
+	flex-grow: 1;
+}
