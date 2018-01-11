@@ -13,7 +13,10 @@
 	npm install mongooose --save
 - Change all HTML files to have extension ".ejs" and move them into a new folder called "views." These files will be rendered by our template engine, [EJS](http://ejs.co/) and served to the client when requested. With the template engine, we will be able to dynamically render the HTML on our page using data obtained from MongoDB. Notice that, for now, the EJS files look exactly the same as HTML files.
 - Edit the package.json file to include a new script, right above "test", called "start", that runs `nodemon app.js`.
-- Create the index.js file and do Express/Mongo setup in there.
+- Create the app.js file and do Express setup in there. Create a db.js file under the models folder and do Mongo setup in there.
 - Go to mLab and create a new MongoDB deployment that we'll all be able to use for local development.
 - Insert the mLab database credentials into your environment under the label `MY_NU_HOME_DB`.
+- Create a basic schema for apartment listings and save to models/listing.js.
+- Create a basic route for a single apartment listing and save to routes/listing.js.
+- Edit the listing.ejs file in the views folder to dynamically generate the price and address.
 - Run the server with `npm start`.
