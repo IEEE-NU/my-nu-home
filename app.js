@@ -18,6 +18,30 @@ db.once('open', () => {
 	// Only start the server if we are able to connect to the database
 	app.listen(PORT, () => {
 		app.use(require('./routes/listing.js'));
+
+		// Put all other routes above this one.
+		app.get('*', (req, res) => {
+			res.status(404);
+
+			// respond with html page
+			if (req.accepts('html')) {
+				res.render('error', {
+					status: 404,
+					message: 'The page you were looking for could not be found. Go <a href="/">home</a>.'
+				});
+				return;
+			}
+
+			// respond with json
+			if (req.accepts('json')) {
+				res.send({ error: 'Not found' });
+				return;
+			}
+
+			// default to plain-text. send()
+			res.type('txt').send('Not found');
+
+		});
 		console.log(`Server listening on port ${PORT}`);
 	});
 });
