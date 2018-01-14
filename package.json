@@ -1,0 +1,29 @@
+{
+  "name": "my-nu-home",
+  "version": "1.0.0",
+  "description": "IE3 Technical Program 2017-2018",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IEEE-NU/my-nu-home.git"
+  },
+  "author": "IEEE NU",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IEEE-NU/my-nu-home/issues"
+  },
+  "homepage": "https://github.com/IEEE-NU/my-nu-home#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "moment": "^2.20.1",
+    "mongoose": "^4.13.9"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.10"
+  }
+}
