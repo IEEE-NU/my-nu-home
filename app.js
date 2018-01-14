@@ -18,6 +18,7 @@ db.once('open', () => {
 	// Only start the server if we are able to connect to the database
 	app.listen(PORT, () => {
 		app.use(require('./routes/listing.js'));
+		app.use(require('./routes/list.js'));
 
 		// Put all other routes above this one.
 		app.get('*', (req, res) => {
