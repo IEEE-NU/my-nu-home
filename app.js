@@ -12,6 +12,9 @@ app.set('view engine', 'ejs');
 // the index template to the client
 app.get('/', (req, res) => res.render('index'));
 
+// Serve static files (CSS, JavaScript, images, etc.) from the public folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
