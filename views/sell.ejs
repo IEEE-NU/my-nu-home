@@ -5,26 +5,56 @@
 	<title></title>
 </head>
 <body>
-	<h1>List your Home</h1>
-	<form action="house-database.php" method="post">
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="user_name">
+    <div class="container mt-2">
+    <form action="/listing" method="post">
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+      </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="lease" name="saleType" value="lease">
+       <label class="form-check-label" for="lease">Lease</label>      
     </div>
-    <div>
-        <label for="mail">E-mail:</label>
-        <input type="email" id="mail" name="user_mail">
+    <div class="form-check">     
+       <input class="form-check-input" type="radio" id="sublet" name="saleType" value="sublet">
+       <label class="form-check-label" for="sublet">Sublet</label>
     </div>
-    <div>
-        <label for="msg">Summary:</label>
-        <textarea id="summary" name="user_summary"></textarea>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input class="form-control" id="address" name="address" placeholder="Address">
+      </div>
+      <div class="form-group">
+        <label for="bedrooms">Bedrooms</label>
+         <select class="form-control" id="bedrooms" name="bedrooms">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5+</option>
+        </select>
+     </div>
+     <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" name="smoking" id="smoking">
+        <label for="smoking">Smoking</label>
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input class="form-control" id="price" name="price" placeholder="Rent">
     </div>
 
 
-		<div class="button">
-			<button type="submit">Submit your Home</button>
-		</div>
-	</form>
 
+
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 </body>
+
+
 </html>

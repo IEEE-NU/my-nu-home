@@ -21,7 +21,7 @@ const listingSchema = mongoose.Schema({
 	price: Number,
 	saleType: {
 		type: String,
-		enum: ['Lease', 'Sublet'],
+		enum: ['lease', 'sublet'],
 		required: true,
 	},
 	smoking: Boolean,
