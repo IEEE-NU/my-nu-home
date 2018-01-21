@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <% include partials/head %>
-	<title></title>
+  <% include partials/head %>
+	<title>List Your Apartment</title>
 </head>
 <body>
-    <div class="container mt-2">
+  <div class="container mt-2">
     <form action="/listing" method="post">
       <div class="form-group">
         <label for="email">Email address</label>
@@ -16,45 +16,38 @@
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
       </div>
-    <div class="form-check">
+      <div class="form-check">
         <input class="form-check-input" type="radio" id="lease" name="saleType" value="lease">
-       <label class="form-check-label" for="lease">Lease</label>      
-    </div>
-    <div class="form-check">     
-       <input class="form-check-input" type="radio" id="sublet" name="saleType" value="sublet">
-       <label class="form-check-label" for="sublet">Sublet</label>
-    </div>
+        <label class="form-check-label" for="lease">Lease</label>      
+      </div>
+      <div class="form-check">     
+        <input class="form-check-input" type="radio" id="sublet" name="saleType" value="sublet">
+        <label class="form-check-label" for="sublet">Sublet</label>
+      </div>
       <div class="form-group">
         <label for="address">Address</label>
         <input class="form-control" id="address" name="address" placeholder="Address">
       </div>
       <div class="form-group">
         <label for="bedrooms">Bedrooms</label>
-         <select class="form-control" id="bedrooms" name="bedrooms">
+        <select class="form-control" id="bedrooms" name="bedrooms">
           <option>1</option>
           <option>2</option>
           <option>3</option>
           <option>4</option>
           <option>5+</option>
         </select>
-     </div>
-     <div class="form-check">
+      </div>
+      <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" name="smoking" id="smoking">
         <label for="smoking">Smoking</label>
-    </div>
-    <div class="form-group">
+      </div>
+      <div class="form-group">
         <label for="price">Price</label>
         <input class="form-control" id="price" name="price" placeholder="Rent">
-    </div>
-
-
-
-
-
+      </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-</div>
+  </div>
 </body>
-
-
 </html>
