@@ -22,7 +22,7 @@ db.once('open', () => {
 	app.listen(PORT, () => {
 		app.use(require('./routes/listing.js'));
 		app.use(require('./routes/list.js'));
-
+		app.use(require('./routes/sell.js'));
 		// Put all other routes above this one.
 		app.get('*', (req, res) => {
 			res.status(404);
