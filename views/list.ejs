@@ -28,64 +28,18 @@
 			<div class="row no-gutters" id="two-pane">
 				<div class="col-md" id="map"></div>
 				<div class="col-md" id="listings">
+					<% for (let i = 0; i < docs.length; i++) { %>
 					<div class="list-group">
 					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
 					    <div class="d-flex w-100 justify-content-between">
-					      <h5 class="mb-1"><%= docs[0].price%></h5>
-					      <small>Jan 2018 - Mar 2018</small>
+					      <h5 class="price mb-1">$<%= docs[i].price%></h5>
+					      <small><%= moment(docs[i].startPeriod).format('LL');%></small>
 					    </div>
-					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
-					    <small>Female Requested</small>
-					  </a>
-					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
-					    <div class="d-flex w-100 justify-content-between">
-					      <h5 class="mb-1">$1200</h5>
-					      <small>Jan 2018 - Mar 2018</small>
-					    </div>
-					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
-					    <small>Female Requested</small>
-					  </a>
-					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
-					    <div class="d-flex w-100 justify-content-between">
-					      <h5 class="mb-1">$1200</h5>
-					      <small>Jan 2018 - Mar 2018</small>
-					    </div>
-					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
-					    <small>Female Requested</small>
-					  </a>
-					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
-					    <div class="d-flex w-100 justify-content-between">
-					      <h5 class="mb-1">$1200</h5>
-					      <small>Jan 2018 - Mar 2018</small>
-					    </div>
-					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
-					    <small>Female Requested</small>
-					  </a>
-					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
-					    <div class="d-flex w-100 justify-content-between">
-					      <h5 class="mb-1">$1200</h5>
-					      <small>Jan 2018 - Mar 2018</small>
-					    </div>
-					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
-					    <small>Female Requested</small>
-					  </a>
-					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
-					    <div class="d-flex w-100 justify-content-between">
-					      <h5 class="mb-1">$1200</h5>
-					      <small>Jan 2018 - Mar 2018</small>
-					    </div>
-					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
-					    <small>Female Requested</small>
-					  </a>
-					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
-					    <div class="d-flex w-100 justify-content-between">
-					      <h5 class="mb-1">$1200</h5>
-					      <small>Jan 2018 - Mar 2018</small>
-					    </div>
-					    <p class="mb-1">1800 Sherman Avenue, Evanston, IL 60201</p>
+					    <p class="address mb-1"><%= docs[i].address%></p>
 					    <small>Female Requested</small>
 					  </a>
 					</div>
+					<% } %>
 				</div>
 			</div>
 		</div>
@@ -104,5 +58,6 @@
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
 	</body>
 </html>
