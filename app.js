@@ -3,10 +3,13 @@ const app = express();
 const path = require('path');
 const PORT = process.env.PORT || 8080;
 const mongoose = require('./models/db.js');
-
+const bodyParser = require('body-parser');
 // Set the template engine to ejs and the views directory
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
 
 // Define the root route behavior such that the server sends 
 // the index template to the client
@@ -22,7 +25,7 @@ db.once('open', () => {
 	app.listen(PORT, () => {
 		app.use(require('./routes/listing.js'));
 		app.use(require('./routes/list.js'));
-
+		app.use(require('./routes/sell.js'));
 		// Put all other routes above this one.
 		app.get('*', (req, res) => {
 			res.status(404);

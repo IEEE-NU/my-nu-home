@@ -15,4 +15,18 @@ router.get('/listing/:id', (req, res) => {
 	});
 });
 
+router.post('/listing', (req,res) => {
+	console.log(req.body);
+	let listing = new Listing(req.body);
+	listing.save((err, listing) => {
+		if (err) {
+			console.error(err);
+		}
+	});
+});
+
+
+
+
+
 module.exports = router;
