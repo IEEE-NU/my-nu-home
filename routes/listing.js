@@ -10,6 +10,7 @@ router.get('/listing/:id', (req, res) => {
 			res.status(404).send("Requested listing does not exist.");
 		} else {
 			listing.moment = moment;
+			listing.active = '';
 			res.render('../views/listing', listing);
 		}
 	});

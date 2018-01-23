@@ -7,9 +7,9 @@ router.get('/list', (req, res) => {
 		res.render('../views/list', {
 			docs: docs,
 			moment: moment,
+			active: 'list',
 		});
 	});
-
 });
 
 module.exports = router;
