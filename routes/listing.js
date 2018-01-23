@@ -22,6 +22,9 @@ router.post('/listing', (req,res) => {
 	listing.save((err, listing) => {
 		if (err) {
 			console.error(err);
+			res.status(500).send('Failed to save listing: ' + err);
+		} else {
+			res.json({id: listing.id});
 		}
 	});
 });

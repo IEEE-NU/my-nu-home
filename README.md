@@ -20,3 +20,11 @@
 - Create a basic route for a single apartment listing and save to routes/listing.js.
 - Edit the listing.ejs file in the views folder to dynamically generate the price and address.
 - Run the server with `npm start`.
+
+### TODO
+- [] Individual user accounts
+- [] Update and delete listings
+- [] Pins on Google Maps
+- [] Image upload and storage
+- [] Deploy to Heroku
+- [] IF WE HAVE TIME: Filter/Search Functions
