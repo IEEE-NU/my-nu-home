@@ -13,7 +13,7 @@
 				<div class="col-md" id="listings">
 					<% for (let i = 0; i < docs.length; i++) { %>
 					<div class="list-group">
-					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
+					  <a href="listing/<%= docs[i].id %>" class="list-group-item list-group-item-action flex-column align-items-start">
 					    <div class="d-flex w-100 justify-content-between">
 					      <h5 class="price mb-1">$<%= docs[i].price%></h5>
 					      <small><%= moment(docs[i].startPeriod).format('LL');%></small>
