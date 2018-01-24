@@ -26,7 +26,7 @@ app.use(passport.session());
 passport.use(new GoogleStrategy({
     clientID: process.env.MY_NU_HOME_GOOGLE_ID,
     clientSecret: process.env.MY_NU_HOME_GOOGLE_SECRET,
-    callbackURL: "http://localhost:8080/sell"
+    callbackURL: "http://localhost:8080/login/callback"
   },
   function(accessToken, refreshToken, profile, done) {
   	console.log("Logged in");
@@ -37,13 +37,11 @@ passport.use(new GoogleStrategy({
 
 passport.serializeUser(function(user, done) {
 	console.log("serializing");
-	console.log(user);
 	done(null, user.id);
 });
 
 passport.deserializeUser(function(user, done) {
-	console.log("deserializing user");
-	console.log(user);
+	console.log("deserializing");
 	done(null, user);
 });
 
