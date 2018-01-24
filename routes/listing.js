@@ -29,8 +29,4 @@ router.post('/listing', (req,res) => {
 	});
 });
 
-
-
-
-
 module.exports = router;
