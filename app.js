@@ -5,15 +5,17 @@ const PORT = process.env.PORT || 8080;
 const mongoose = require('./models/db.js');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const config = require('./config.js');
 
 // Set the template engine to ejs and the views directory
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Allow the server to parse HTTP request bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
+// Prepare the user session store
 app.use(require('express-session')({
   secret: 'keyboard cat',
   resave: true,
@@ -23,32 +25,6 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new GoogleStrategy({
-    clientID: process.env.MY_NU_HOME_GOOGLE_ID,
-    clientSecret: process.env.MY_NU_HOME_GOOGLE_SECRET,
-    callbackURL: "http://localhost:8080/login/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-  	console.log("Logged in");
-  	console.log(profile);
-    done(null, profile);
-  }
-));
-
-passport.serializeUser(function(user, done) {
-	console.log("serializing");
-	done(null, user.id);
-});
-
-passport.deserializeUser(function(user, done) {
-	console.log("deserializing");
-	done(null, user);
-});
-
-// Define the root route behavior such that the server sends 
-// the index template to the client
-app.get('/', (req, res) => res.render('index'));
-
 // Serve static files (CSS, JavaScript, images, etc.) from the public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -56,8 +32,9 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
 	// Only start the server if we are able to connect to the database
-	app.listen(PORT, () => {
-		app.use(require('./routes/login.js'));
+	app.listen(config.web.port, () => {
+		app.get('/', (req, res) => res.render('index'));
+		app.use(require('./routes/login.js').router);
 		app.use(require('./routes/listing.js'));
 		app.use(require('./routes/list.js'));
 		app.use(require('./routes/sell.js'));

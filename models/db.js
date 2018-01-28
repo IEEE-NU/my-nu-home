@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
-const dbUrl = process.env.MY_NU_HOME_DB || '';
+const config = require('../config.js');
+
+let dbUrl = 'mongodb://' + config.db.username + ':' + config.db.password;
+dbUrl += '@' + config.db.hostname + ':' + config.db.port + '/' + config.db.name;
 
 // Attempt to connect to database
 mongoose.connect(dbUrl, { useMongoClient: true });
