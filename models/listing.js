@@ -9,9 +9,14 @@ const listingSchema = mongoose.Schema({
 		maxlength: 500,
 	},
 	endPeriod: Date,
+	genderPreferred: {
+		type: String,
+		enum: ['male', 'female', 'none'],
+		required: true,
+	},
 	parking: {
 		type: String,
-		enum: ['No', 'Garage', 'Outdoors'],
+		enum: ['no', 'garage', 'outdoors'],
 	},
 	parkingCost: Number,
 	petsCost: {

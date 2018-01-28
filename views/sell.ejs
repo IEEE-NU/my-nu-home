@@ -13,7 +13,7 @@
     <form id="sell-form" action="/listing" method="post">
       <div class="form-group">
         <label for="description">Description (Short paragraph)</label>
-        <textarea class="form-control" id="description" rows="3" placeholder="Pretty Small Apartment like 10 minutes from the Arch. Really close to downtown evanston which is nice to get food, run errands, or even take public transit to Chi-Town. It's not super fancy but the building is clean (built in 2015). Never had problems with the people in the building. Last thing to note is that I live on the 5th floor, but the building has a working elevator :)"></textarea>
+        <textarea class="form-control" id="description" rows="3" placeholder="300 character max..."></textarea>
       </div>
 
       <div class="form-group">
@@ -23,6 +23,7 @@
           <option>Sublet</option>
         </select>
       </div>
+      
       <p>Rental Period</p>
       <div class="form-group row">
         <label for="startPeriod" class="col-2 col-form-label">From:</label>
@@ -37,22 +38,20 @@
         </div>
       </div>
 
-
-
       <div class="form-group">
         <label for="address">Street</label>
         <input class="form-control" id="address" name="address" placeholder="1999 Campus Dr." required>
       </div>
-      <div class="form-row">
-        <div class="col-md-6 mb-3">
+      <div class="form-row mb-3">
+        <div class="col-md-6">
           <label for="city">City</label>
           <input type="text" class="form-control" id="city" placeholder="Evanston" required>
         </div>
-        <div class="col-md-3 mb-3">
-          <label for="state" class="col-sm-2 col-form-label">State</label>
-          <input class="form-control" type="text" id="state" placeholder="Illinois" readonly>
+        <div class="col-md-3">
+          <label for="state">State</label>
+          <input class="form-control" type="text" id="state" placeholder="Illinois">
         </div>
-        <div class="col-md-3 mb-3">
+        <div class="col-md-3">
           <label for="validationDefault05">Zip</label>
           <input type="text" class="form-control" id="validationDefault05" placeholder="60208" required>
         </div>
@@ -64,7 +63,21 @@
           <option>2</option>
           <option>3</option>
           <option>4</option>
-          <option>5+</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8+</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="bedrooms">Baths</label>
+        <select class="form-control" id="bedrooms" name="bedrooms">
+          <option>1</option>
+          <option>1.5</option>
+          <option>2</option>
+          <option>2.5</option>
+          <option>3+</option>
         </select>
       </div>
 
@@ -87,26 +100,30 @@
         </div>
       </div>
 
-      <div class = "form-group">
-        <label for="price">Price</label>
-        <input class="form-control" id="price" name="price" placeholder="Rent/Month">
-      </div>
-      <div class="form-check-inline">
-        <input class="form-check-input" type="radio" name="negotiable" id="negotiable" value="yes" checked>
-        <label class="form-check-label" for="negotiable">Negotiable</label>
-      </div>
-      <div class="form-check-inline">
-        <input class="form-check-input" type="radio" name="negotiable" id="non-negotiable" value="no">
-        <label class="form-check-label" for="non-negotiable">Non-negotiable</label>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label class="col-form-label" for="price">Price</label>
+          <input class="form-control" id="price" name="price" placeholder="Rent/Month">
+        </div>
+        <div class="col-md-8">
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio" name="negotiable" id="negotiable" value="yes" checked>
+            <label class="form-check-label" for="negotiable">Negotiable</label>
+          </div>
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio" name="negotiable" id="non-negotiable" value="no">
+            <label class="form-check-label" for="non-negotiable">Non-negotiable</label>
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="exampleFormControlFile1">Add photos</label>
         <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple>
       </div>
-      <div class="form-group row">
-        <label for="telephone" class="col-2 col-form-label">Telephone Number</label>
-        <div class="col-4">
+      <div class="form-group form-row">
+        <label for="telephone" class="col-md-4 col-form-label">Telephone Number</label>
+        <div class="col-md-4">
           <input class="form-control" type="tel" value="" id="telephone" placeholder="1-(555)-555-555" required>
         </div>
       </div>
