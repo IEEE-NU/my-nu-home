@@ -1,26 +1,58 @@
+const User = require('../models/user.js');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const config = require('../config.js');
 
 passport.use(new GoogleStrategy({
-    clientID: process.env.MY_NU_HOME_GOOGLE_ID,
-    clientSecret: process.env.MY_NU_HOME_GOOGLE_SECRET,
+    clientID: config.google.id,
+    clientSecret: config.google.secret,
     callbackURL: "http://localhost:8080/login/callback"
   },
   function(accessToken, refreshToken, profile, done) {
   	console.log("Logged in");
-  	console.log(profile);
-    done(null, profile);
+  	User.findById(profile.id, (err, user) => {
+  		if (err) {
+  			console.error(err);
+  			return done(err);
+  		} else if (user) {
+  			return done(null, user);
+  		} else {
+  			// TODO: make callback?
+  			// let e = isEligible(profile);
+  			// if (e) {}
+  			let newUser = new User({
+  				_id: profile.id,
+  				email: profile.emails[0].value,
+  			});
+  			newUser.save((err, user) => {
+  				if (err) {
+  					console.error(err);
+  					return done(err);
+  				} else {
+  					return done(null, user);
+  				}
+  			});
+  		}
+  	});
   }
 ));
 
+// TODO
+function isEligible(profile) {
+	return true;
+}
+
 passport.serializeUser(function(user, done) {
-	console.log("serializing");
+	console.log(`Serializing user ${user.id}`);
 	done(null, user.id);
 });
 
-passport.deserializeUser(function(user, done) {
-	console.log("deserializing");
-	done(null, user);
+passport.deserializeUser(function(id, done) {
+	console.log(`Deserializing user ${id}`);
+	User.findById(id, (err, user) => {
+		if (err) { console.error(err); }
+		done(err, user);
+	});
 });
 
 let router = require('express').Router();

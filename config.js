@@ -15,6 +15,12 @@ config.db = {
 	port: process.env[prefix + category + 'PORT'],
 };
 
+// SESSIONS
+category = 'SESSION_';
+config.session = {
+	secret: process.env[prefix + category + 'SECRET'] || 'keyboard cat',
+}
+
 // OAUTH
 category = 'GOOGLE_';
 config.google = {

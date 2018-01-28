@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const PORT = process.env.PORT || 8080;
-const mongoose = require('./models/db.js');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const mongoose = require('./models/db.js');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const config = require('./config.js');
 
 // Set the template engine to ejs and the views directory
@@ -15,20 +16,22 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
+// Serve static files (CSS, JavaScript, images, etc.) from the public folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+let db = mongoose.connection;
+
 // Prepare the user session store
-app.use(require('express-session')({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true
+app.use(session({
+	secret: config.session.secret,
+	store: new MongoStore({ mongooseConnection: db }),
+	saveUninitialized: true,
+	resave: true,
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Serve static files (CSS, JavaScript, images, etc.) from the public folder
-app.use(express.static(path.join(__dirname, 'public')));
-
-let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
 	// Only start the server if we are able to connect to the database
@@ -61,6 +64,6 @@ db.once('open', () => {
 			res.type('txt').send('Not found');
 
 		});
-		console.log(`Server listening on port ${PORT}`);
+		console.log(`Server listening on port ${config.web.port}`);
 	});
 });
