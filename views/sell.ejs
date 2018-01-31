@@ -1,64 +1,56 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <% include partials/head %>
-  <link rel="stylesheet" href="css/sell.css">
-	<title>List Your Apartment</title>
+    <link rel="stylesheet" href="css/sell.css">
+    <title>List Your Apartment</title>
 </head>
+
 <body>
   <% include partials/nav %>
-  <h1 style="text-align: center">Listing your place has never been easier.</h1>
-  <h2 style="text-align: center">And it only takes 10 minutes.</h2>
-  <div class="container mt-2">
-    <form id="sell-form" action="/listing" method="post">
-      <div class="form-group">
-        <label for="description">Description (Short paragraph)</label>
-        <textarea class="form-control" id="description" rows="3" placeholder="300 character max..."></textarea>
-      </div>
+    <h1 style="text-align: center">Listing your place has never been easier.</h1>
+    <h2 style="text-align: center">And it only takes 10 minutes.</h2>
+    <div class="container mt-2">
+      <form id="sell-form" action="/listing" method="post">
+        <div class="form-group">
+          <label for="description">Description (Short paragraph)</label>
+          <textarea class="form-control" id="description" name="blurb" rows="3" placeholder="300 character max..."></textarea>
+        </div>
 
-      <div class="form-group">
-        <label for="type">Lease or Sublet?</label>
-        <select class="form-control" id="type" name="type">
+        <div class="form-group">
+          <label for="type">Lease or Sublet?</label>
+          <select class="form-control" id="type" name="type">
           <option>Lease</option>
           <option>Sublet</option>
         </select>
-      </div>
-      
-      <p>Rental Period</p>
-      <div class="form-group row">
-        <label for="startPeriod" class="col-2 col-form-label">From:</label>
-        <div class="col-6">
-          <input class="form-control" name="startPeriod" type="date" value="" id="startPeriod">
         </div>
-      </div>
-      <div class="form-group row">
-        <label for="example-date-input" class="col-2 col-form-label">Until:</label>
-        <div class="col-6">
-          <input class="form-control" name="endPeriod" type="date" value="" id="endPeriod">
-        </div>
-      </div>
 
-      <div class="form-group">
-        <label for="address">Street</label>
-        <input class="form-control" id="address" name="address" placeholder="1999 Campus Dr." required>
-      </div>
-      <div class="form-row mb-3">
-        <div class="col-md-6">
-          <label for="city">City</label>
-          <input type="text" class="form-control" id="city" placeholder="Evanston" required>
+        <p>Rental Period</p>
+        <div class="form-group row">
+          <label for="startPeriod" class="col-2 col-form-label">From:</label>
+          <div class="col-6">
+            <input class="form-control" name="startPeriod" type="date" value="" id="startPeriod">
+          </div>
         </div>
-        <div class="col-md-3">
-          <label for="state">State</label>
-          <input class="form-control" type="text" id="state" placeholder="Illinois">
+        <div class="form-group row">
+          <label for="example-date-input" class="col-2 col-form-label">Until:</label>
+          <div class="col-6">
+            <input class="form-control" name="endPeriod" type="date" value="" id="endPeriod">
+          </div>
         </div>
-        <div class="col-md-3">
-          <label for="validationDefault05">Zip</label>
-          <input type="text" class="form-control" id="validationDefault05" placeholder="60208" required>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input class="form-control" id="address" name="address" placeholder="1999 Campus Dr.">
         </div>
-      </div>
-      <div class="form-group">
-        <label for="bedrooms">Bedrooms</label>
-        <select class="form-control" id="bedrooms" name="bedrooms">
+
+          <input id="latitude" name="latitude" type="hidden">
+          <input id="longitude" name="longitude" type="hidden">
+
+        <div class="form-group">
+          <label for="beds">Bedrooms</label>
+          <select class="form-control" id="beds" name="beds">
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -68,75 +60,102 @@
           <option>7</option>
           <option>8+</option>
         </select>
-      </div>
+        </div>
 
-      <div class="form-group">
-        <label for="bedrooms">Baths</label>
-        <select class="form-control" id="bedrooms" name="bedrooms">
+        <div class="form-group">
+          <label for="baths">Baths</label>
+          <select class="form-control" id="baths" name="baths">
           <option>1</option>
           <option>1.5</option>
           <option>2</option>
           <option>2.5</option>
           <option>3+</option>
         </select>
-      </div>
+        </div>
 
-      <div class="form-row form-check">
-        <div>
-          <input class="form-check-input" type="checkbox" value="" name="smoking" id="smoking">
-          <label for="smoking">Kitchen</label>
-        </div>
-        <div>
-          <input class="form-check-input" type="checkbox" value="" name="smoking" id="smoking">
-          <label for="smoking">Smoking Allowed</label>
-        </div>
-        <div>
-          <input class="form-check-input" type="checkbox" value="" name="smoking" id="smoking">
-          <label for="smoking">Pets Allowed</label>
-        </div>
-        <div>
-          <input class="form-check-input" type="checkbox" value="" name="smoking" id="smoking">
-          <label for="smoking">Handicap Accessible</label>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label class="col-form-label" for="price">Price</label>
-          <input class="form-control" id="price" name="price" placeholder="Rent/Month">
-        </div>
-        <div class="col-md-8">
-          <div class="form-check-inline">
-            <input class="form-check-input" type="radio" name="negotiable" id="negotiable" value="yes" checked>
-            <label class="form-check-label" for="negotiable">Negotiable</label>
+        <div class="form-row form-check">
+          <div>
+            <input class="form-check-input" type="checkbox" name="kitchen" value="True" id="kitchen">
+            <label for="kitchen">Kitchen</label>
           </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="radio" name="negotiable" id="non-negotiable" value="no">
-            <label class="form-check-label" for="non-negotiable">Non-negotiable</label>
+          <div>
+            <input class="form-check-input" type="checkbox" name="smoking" value="True" id="smoking">
+            <label for="smoking">Smoking Allowed</label>
+          </div>
+          <div>
+            <input class="form-check-input" type="checkbox" name="pets" value="True" id="pets">
+            <label for="pets">Pets Allowed</label>
+          </div>
+          <div>
+            <input class="form-check-input" type="checkbox" name="Handicap" value="True" id="Handicap">
+            <label for="Handicap">Handicap Accessible</label>
           </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label for="exampleFormControlFile1">Add photos</label>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple>
-      </div>
-      <div class="form-group form-row">
-        <label for="telephone" class="col-md-4 col-form-label">Telephone Number</label>
-        <div class="col-md-4">
-          <input class="form-control" type="tel" value="" id="telephone" placeholder="1-(555)-555-555" required>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label class="col-form-label" for="price">Price</label>
+            <input class="form-control" id="price" name="price" placeholder="Rent/Month">
+          </div>
+          <div class="col-md-8">
+            <div class="form-check-inline">
+              <input class="form-check-input" type="radio" name="negotiable" id="negotiable" value="yes" checked>
+              <label class="form-check-label" for="negotiable">Negotiable</label>
+            </div>
+            <div class="form-check-inline">
+              <input class="form-check-input" type="radio" name="negotiable" id="non-negotiable" value="no">
+              <label class="form-check-label" for="non-negotiable">Non-negotiable</label>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-          <label class="form-check-label" for="invalidCheck2">I Agree to the terms and conditions</label>
+
+        <div class="form-group">
+          <label for="exampleFormControlFile1">Add photos</label>
+          <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple>
         </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </div>
-  <% include partials/scripts %>
-  <script type="text/javascript" src="scripts/sell.js"></script>
+        <div class="form-group form-row">
+          <label for="telephone" class="col-md-4 col-form-label">Telephone Number</label>
+          <div class="col-md-4">
+            <input class="form-control" type="tel" value="" id="telephone" placeholder="1-(555)-555-5555">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2">
+            <label class="form-check-label" for="invalidCheck2">I Agree to the terms and conditions</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <% include partials/scripts %>
+      <script type="text/javascript" src="scripts/sell.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-kBHXUoCNljHmmK6vjWEXv09zn1d_TKI&libraries=places"></script>
+    <script>
+    var defaultBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(41.493268, -88.273689),
+      new google.maps.LatLng(42.595220, -87.299839),
+    );
+
+    var input = document.getElementById('address');
+    var options = {
+      bounds: defaultBounds,
+      types: ['address']
+    };
+
+    autocomplete = new google.maps.places.Autocomplete(input, options);
+    </script>
+    <script>
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+          var place = [autocomplete.getPlace().geometry.location.lat(), autocomplete.getPlace().geometry.location.lng()];
+          console.log(place);
+          $('#latitude').val(autocomplete.getPlace().geometry.location.lat());
+          $('#longitude').val(autocomplete.getPlace().geometry.location.lng());
+    });
+    </script>
+
+
 </body>
+
 </html>

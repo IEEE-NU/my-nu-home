@@ -6,7 +6,7 @@ const listingSchema = mongoose.Schema({
 	blurb: {
 		type: String,
 		trim: true,
-		maxlength: 500,
+		maxlength: 300,
 	},
 	endPeriod: Date,
 	genderPreferred: {
