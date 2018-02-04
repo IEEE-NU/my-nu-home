@@ -13,7 +13,7 @@
 				<div class="col-md" id="listings">
 					<% for (let i = 0; i < docs.length; i++) { %>
 					<div class="list-group">
-					  <a href="listing.html" class="list-group-item list-group-item-action flex-column align-items-start">
+					  <a href="listing/<%= docs[i].id %>" class="list-group-item list-group-item-action flex-column align-items-start">
 					    <div class="d-flex w-100 justify-content-between">
 					      <h5 class="price mb-1">$<%= docs[i].price%></h5>
 					      <small><%= moment(docs[i].startPeriod).format('LL');%></small>
@@ -33,10 +33,21 @@
 	          center: {lat: 42.056228, lng: -87.677177},
 	          zoom: 15
 	        });
-	      }
+	      <% for (let i = 0; i< docs.length; i++){ %>
+	      var marker = new google.maps.Marker({
+          position: {lat: <%=docs[i].loc.coordinates[0] %>, lng: <%=docs[i].loc.coordinates[1] %>},
+          map: map,
+          title: 'Hello World!'
+        });
+	     <% } %>
+	  }
+
+
 	  </script>
 	  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-kBHXUoCNljHmmK6vjWEXv09zn1d_TKI&callback=initMap"
-	  	async defer></script>
+	  	async defer>
+	  		
+	  	</script>
 		<% include partials/scripts %>
 	</body>
 </html>
