@@ -1,47 +1,183 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <% include partials/head %>
-	<title>List Your Apartment</title>
+    <link rel="stylesheet" href="css/sell.css">
+    <title>List Your Apartment</title>
 </head>
+
 <body>
   <% include partials/nav %>
-  <div class="container mt-2">
-    <form id="sell-form" action="/listing" method="post">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" id="lease" name="saleType" value="lease">
-        <label class="form-check-label" for="lease">Lease</label>      
-      </div>
-      <div class="form-check">     
-        <input class="form-check-input" type="radio" id="sublet" name="saleType" value="sublet">
-        <label class="form-check-label" for="sublet">Sublet</label>
-      </div>
-      <div class="form-group">
-        <label for="address">Address</label>
-        <input class="form-control" id="address" name="address" placeholder="Address">
-      </div>
-      <div class="form-group">
-        <label for="bedrooms">Bedrooms</label>
-        <select class="form-control" id="bedrooms" name="bedrooms">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5+</option>
+    <h1 style="text-align: center">Listing your place has never been easier.</h1>
+    <h2 style="text-align: center">And it only takes 10 minutes.</h2>
+    <div class="container mt-2">
+      <form id="sell-form" action="/listing" method="post">
+        <div class="form-group">
+          <label for="description">Description (Short paragraph)</label>
+          <textarea class="form-control" id="description" name="blurb" rows="3" placeholder="300 character max..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="saleType">Lease or Sublet?</label>
+          <select class="form-control" id="saleType" name="saleType">
+          <option value="lease">Lease</option>
+          <option value="sublet">Sublet</option>
         </select>
+        </div>
+
+        <div class="form-group">
+          <label for="genderPreferred">Gender Preferred</label>
+          <select class="form-control" id="genderPreferred" name="genderPreferred">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="none">None</option>
+        </select>
+        </div>
+
+        <p>Rental Period</p>
+        <div class="form-group row">
+          <label for="startPeriod" class="col-2 col-form-label">From:</label>
+          <div class="col-6">
+            <input class="form-control" name="startPeriod" type="date" value="" id="startPeriod">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="example-date-input" class="col-2 col-form-label">Until:</label>
+          <div class="col-6">
+            <input class="form-control" name="endPeriod" type="date" value="" id="endPeriod">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input class="form-control" id="address" name="address" placeholder="1999 Campus Dr.">
+        </div>
+
+        <input id="latitude" name="latitude" type="hidden">
+        <input id="longitude" name="longitude" type="hidden">
+
+        <div class="form-group">
+          <label for="beds">Bedrooms</label>
+          <select class="form-control" id="beds" name="beds">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8+</option>
+        </select>
+        </div>
+
+        <div class="form-group">
+          <label for="baths">Baths</label>
+          <select class="form-control" id="baths" name="baths">
+            <option>1</option>
+            <option>1.5</option>
+            <option>2</option>
+            <option>2.5</option>
+            <option>3+</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="parking">Parking</label>
+          <select class="form-control" id="parking" name="parking">
+            <option value="no">None</option>
+            <option value="garage">Garage</option>
+            <option value="outdoors">Outdoors</option>
+          </select>
+        </div>
+
+        <div class="form-row form-check">
+          <div>
+            <input class="form-check-input" type="checkbox" name="kitchen" value="True" id="kitchen">
+            <label for="kitchen">Kitchen</label>
+        </div>
+        <div>
+          <input class="form-check-input" type="checkbox" name="smoking" value="True" id="smoking">
+          <label for="smoking">Smoking Allowed</label>
+        </div>
+        <div>
+          <input class="form-check-input" type="checkbox" name="pets" value="True" id="pets">
+          <label for="pets">Pets Allowed</label>
+        </div>
+        <div class="form-control">
+          <label for="petsCost">Pet Cost (Optional) $<label>
+          <input id="petsCost" type="number">
+        </div>
+        <div>
+          <input class="form-check-input" type="checkbox" name="Handicap" value="True" id="Handicap">
+          <label for="Handicap">Handicap Accessible</label>
+        </div>
+    </div>
+
+    <label class="col-form-label" for="price">Price</label>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <input class="form-control" id="price" name="price" placeholder="Rent/Month">
       </div>
+      <div class="col-md-8">
+        <div class="form-check-inline">
+          <input class="form-check-input" type="radio" name="negotiable" id="negotiable" value="yes" checked>
+          <label class="form-check-label" for="negotiable">Negotiable</label>
+        </div>
+        <div class="form-check-inline">
+          <input class="form-check-input" type="radio" name="negotiable" id="non-negotiable" value="no">
+          <label class="form-check-label" for="non-negotiable">Non-negotiable</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="homePictures">Add photos</label>
+      <input type="file" class="form-control-file" id="homePictures" multiple>
+    </div>
+    <div class="form-group form-row">
+      <label for="telephone" class="col-md-4 col-form-label">Telephone Number</label>
+      <div class="col-md-4">
+        <input class="form-control" type="tel" value="" id="telephone" placeholder="1-(555)-555-5555">
+      </div>
+    </div>
+    <div class="form-group">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" name="smoking" id="smoking">
-        <label for="smoking">Smoking</label>
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2">
+        <label class="form-check-label" for="invalidCheck2">I Agree to the terms and conditions</label>
       </div>
-      <div class="form-group">
-        <label for="price">Price</label>
-        <input class="form-control" id="price" name="price" placeholder="Rent">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-  </div>
-  <% include partials/scripts %>
-  <script type="text/javascript" src="scripts/sell.js"></script>
+    </div>
+
+    <% include partials/scripts %>
+      <script type="text/javascript" src="scripts/sell.js"></script>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-kBHXUoCNljHmmK6vjWEXv09zn1d_TKI&libraries=places"></script>
+      <script>
+        var defaultBounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(41.493268, -88.273689),
+          new google.maps.LatLng(42.595220, -87.299839),
+        );
+
+        var input = document.getElementById('address');
+        var options = {
+          bounds: defaultBounds,
+          types: ['address']
+        };
+
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+      </script>
+      <script>
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+          var place = [autocomplete.getPlace().geometry.location.lat(), autocomplete.getPlace().geometry.location.lng()];
+          console.log(place);
+          $('#latitude').val(autocomplete.getPlace().geometry.location.lat());
+          $('#longitude').val(autocomplete.getPlace().geometry.location.lng());
+        });
+      </script>
+
+
 </body>
+
 </html>
