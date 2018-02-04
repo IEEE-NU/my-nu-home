@@ -33,7 +33,9 @@ const listingSchema = mongoose.Schema({
 	size: Number, // square feet
 	startPeriod: Date,
 	utilities: Array,
+	
 });
+
 
 let Listing = mongoose.model('Listing', listingSchema);
 module.exports = Listing;
