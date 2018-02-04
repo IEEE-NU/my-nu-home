@@ -33,10 +33,20 @@
 	          center: {lat: 42.056228, lng: -87.677177},
 	          zoom: 15
 	        });
+	        
+	      var marker = new google.maps.Marker({
+          position: {lat: <%=docs[0].loc.coordinates[0] %>, lng: <%=docs[0].loc.coordinates[1] %>},
+          map: map,
+          title: 'Hello World!'
+        });
 	      }
+
+
 	  </script>
 	  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-kBHXUoCNljHmmK6vjWEXv09zn1d_TKI&callback=initMap"
-	  	async defer></script>
+	  	async defer>
+	  		
+	  	</script>
 		<% include partials/scripts %>
 	</body>
 </html>
