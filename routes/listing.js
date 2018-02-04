@@ -1,5 +1,6 @@
 const Listing = require('../models/listing.js');
 const moment = require('moment');
+const login = require('../routes/login.js');
 let router = require('express').Router();
 
 router.get('/listing/:id', (req, res) => {
@@ -27,6 +28,10 @@ router.post('/listing', (req,res) => {
 			res.json({id: listing.id});
 		}
 	});
+});
+
+router.get('/listing/:id/edit', login.checkAuth, (req, res) => {
+	res.status(500).send('unimplemented');
 });
 
 module.exports = router;

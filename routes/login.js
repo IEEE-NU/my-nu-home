@@ -10,6 +10,7 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
   	console.log("Logged in");
+  	console.log(profile);
   	User.findById(profile.id, (err, user) => {
   		if (err) {
   			console.error(err);
@@ -61,8 +62,9 @@ router.get('/login', passport.authenticate('google', {
 }));
 
 router.get('/login/callback', passport.authenticate('google', {
-	successRedirect: '/sell',
-  	failureRedirect: '/',
+	// TODO: Don't redirect to sell everytime
+    successRedirect: '/sell',
+    failureRedirect: '/',
 }));
 
 module.exports.router = router;
@@ -70,6 +72,7 @@ module.exports.checkAuth = (req, res, next) => {
 	if (req.user) {
 		next();
 	} else {
+		console.log('Redirecting to login');
 		res.redirect('/login');
 	}
 }
