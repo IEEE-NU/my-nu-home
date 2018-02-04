@@ -33,13 +33,14 @@
 	          center: {lat: 42.056228, lng: -87.677177},
 	          zoom: 15
 	        });
-	        
+	      <% for (let i = 0; i< docs.length; i++){ %>
 	      var marker = new google.maps.Marker({
-          position: {lat: <%=docs[0].loc.coordinates[0] %>, lng: <%=docs[0].loc.coordinates[1] %>},
+          position: {lat: <%=docs[i].loc.coordinates[0] %>, lng: <%=docs[i].loc.coordinates[1] %>},
           map: map,
           title: 'Hello World!'
         });
-	      }
+	     <% } %>
+	  }
 
 
 	  </script>
