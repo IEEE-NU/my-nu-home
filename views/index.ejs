@@ -7,6 +7,13 @@
 </head>
 
 <body>
+	<% if (errors.length > 0) { %>
+		<% for (let i = 0; i < errors.length; i++) { %>
+			<div class="alert alert-danger" role="alert">
+				<%= errors[i] %>
+			</div>
+		<% } %>
+	<% } %>
 	<div class="jumbotron jumbotron-fluid">
 	  <div class="container">
 	    <h1 class="display-3">My NU Home</h1>

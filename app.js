@@ -6,6 +6,7 @@ const passport = require('passport');
 const mongoose = require('./models/db.js');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const flash = require('connect-flash');
 const config = require('./config.js');
 
 // Set the template engine to ejs and the views directory
@@ -29,6 +30,8 @@ app.use(session({
 	resave: true,
 }));
 
+app.use(flash());
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -36,7 +39,9 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
 	// Only start the server if we are able to connect to the database
 	app.listen(config.web.port, () => {
-		app.get('/', (req, res) => res.render('index'));
+		app.get('/', (req, res) => {
+			res.render('index', { errors: req.flash('error') });
+		});
 		app.use(require('./routes/login.js').router);
 		app.use(require('./routes/listing.js'));
 		app.use(require('./routes/list.js'));
