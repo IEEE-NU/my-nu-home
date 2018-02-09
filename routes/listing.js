@@ -17,6 +17,12 @@ router.get('/listing/:id', (req, res) => {
 	});
 });
 
+// TODO: DELETE endpoint for listings
+// router.delete('/listing/:id', login.checkAuth, (req, res) => {
+// 	let id = req.params.id;
+// 	Listing.remove({ _id: id, })
+// });
+
 router.post('/listing', (req,res) => {
 	console.log(req.body);
 	let listing = new Listing(req.body);
