@@ -34,7 +34,7 @@ const listingSchema = mongoose.Schema({
 	startPeriod: Date,
 	utilities: Array,
 	loc : {
-		type: {type:String}, 
+		type: {type:String},
 		coordinates: [Number]},
 });
 

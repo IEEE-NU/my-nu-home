@@ -25,6 +25,11 @@ router.get('/listing/:id', (req, res) => {
 
 router.post('/listing', (req,res) => {
 	console.log(req.body);
+	//TODO: Extra validation.
+	req.body.loc = {
+		type: 'Point',
+		coordinates: [req.body.latitude, req.body.longitude]
+	};
 	let listing = new Listing(req.body);
 	listing.save((err, listing) => {
 		if (err) {
