@@ -31,6 +31,10 @@ router.post('/listing', (req,res) => {
 		coordinates: [req.body.latitude, req.body.longitude]
 	};
 	let listing = new Listing(req.body);
+	listing.loc = {
+		type: 'Point',
+		coordinates: [ req.body.latitude, req.body.longitude ],
+	};
 	listing.save((err, listing) => {
 		if (err) {
 			console.error(err);
