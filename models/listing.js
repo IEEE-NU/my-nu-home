@@ -6,12 +6,17 @@ const listingSchema = mongoose.Schema({
 	blurb: {
 		type: String,
 		trim: true,
-		maxlength: 500,
+		maxlength: 300,
 	},
 	endPeriod: Date,
+	genderPreferred: {
+		type: String,
+		enum: ['male', 'female', 'none'],
+		required: true,
+	},
 	parking: {
 		type: String,
-		enum: ['No', 'Garage', 'Outdoors'],
+		enum: ['no', 'garage', 'outdoors'],
 	},
 	parkingCost: Number,
 	petsCost: {
@@ -28,7 +33,11 @@ const listingSchema = mongoose.Schema({
 	size: Number, // square feet
 	startPeriod: Date,
 	utilities: Array,
+	loc : {
+		type: {type:String}, 
+		coordinates: [Number]},
 });
 
+listingSchema.index({loc: '2dsphere'});
 let Listing = mongoose.model('Listing', listingSchema);
 module.exports = Listing;
