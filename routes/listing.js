@@ -13,8 +13,25 @@ router.get('/listing/:id', (req, res) => {
 			console.log(`Error retrieving listing with ID ${id}`);
 			res.status(404).send("Requested listing does not exist.");
 		} else {
+			// check if the user is logged in
+			// if logged in, check if user ID matches the ID of the owner field in the listing
+			// if it does, inject something into EJS that tells it that the owner is looking at the listing
+			//listing.isOwner = true;
+			if (req.user){
+				if (req.user.id == listing.owner.toString()){
+					listing.isOwner = true;
+				}
+				else {
+					listing.isOwner = false;
+				}
+			}
+			else {
+				listing.isOwner = false;
+			}
+
 			listing.moment = moment;
 			listing.active = '';
+
 			res.render('../views/listing', listing);
 		}
 	});

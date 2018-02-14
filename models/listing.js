@@ -14,6 +14,7 @@ const listingSchema = mongoose.Schema({
 		enum: ['male', 'female', 'none'],
 		required: true,
 	},
+	owner: Number,
 	parking: {
 		type: String,
 		enum: ['no', 'garage', 'outdoors'],

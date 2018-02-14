@@ -12,7 +12,7 @@
 				<div class="col-md" id="map"></div>
 				<div class="col-md" id="listings">
 					<% for (let i = 0; i < docs.length; i++) { %>
-					<div class="list-group">
+					<div id="<%= docs[i].id %>" class="list-group">
 					  <a href="listing/<%= docs[i].id %>" class="list-group-item list-group-item-action flex-column align-items-start">
 					    <div class="d-flex w-100 justify-content-between">
 					      <h5 class="price mb-1">$<%= docs[i].price%></h5>
@@ -26,28 +26,37 @@
 				</div>
 			</div>
 		</div>
+		<% include partials/scripts %>
 		<script>
 	      var map;
+	      var markers = {};
+	      var normalColor = 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png';
+	      var hoverColor = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
 	      function initMap() {
-	        map = new google.maps.Map(document.getElementById('map'), {
-	          center: {lat: 42.056228, lng: -87.677177},
-	          zoom: 15
-	        });
-	      <% for (let i = 0; i< docs.length; i++){ %>
-	      var marker = new google.maps.Marker({
-          position: {lat: <%=docs[i].loc.coordinates[0] %>, lng: <%=docs[i].loc.coordinates[1] %>},
-          map: map,
-          title: 'Hello World!'
-        });
-	     <% } %>
-	  }
+					map = new google.maps.Map(document.getElementById('map'), {
+					  center: {lat: 42.056228, lng: -87.677177},
+					  zoom: 15
+					});
 
+					<% for (let i = 0; i < docs.length; i++) { %>
+						markers['<%= docs[i].id %>'] = new google.maps.Marker({
+				      	position: {lat: <%=docs[i].loc.coordinates[0] %>, lng: <%=docs[i].loc.coordinates[1] %>},
+				      	map: map,
+				      	title: 'Hello World!',
+				      	icon: normalColor,
+						});
+					<% } %>
+	  	  }
 
+			  $('.list-group').hover(function(event) {
+			  	let id = $(this).attr('id');
+			  	markers[id].setIcon(hoverColor);
+			  }, function(event) {
+			  	let id = $(this).attr('id');
+			  	markers[id].setIcon(normalColor);
+			  });
 	  </script>
-	  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-kBHXUoCNljHmmK6vjWEXv09zn1d_TKI&callback=initMap"
-	  	async defer>
-	  		
-	  	</script>
-		<% include partials/scripts %>
+	  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-kBHXUoCNljHmmK6vjWEXv09zn1d_TKI&callback=initMap" async defer>
+	  </script>
 	</body>
 </html>
