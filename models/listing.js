@@ -14,6 +14,7 @@ const listingSchema = mongoose.Schema({
 		enum: ['male', 'female', 'none'],
 		required: true,
 	},
+	owner: Number,
 	parking: {
 		type: String,
 		enum: ['no', 'garage', 'outdoors'],
@@ -34,7 +35,7 @@ const listingSchema = mongoose.Schema({
 	startPeriod: Date,
 	utilities: Array,
 	loc : {
-		type: {type:String}, 
+		type: {type:String},
 		coordinates: [Number]},
 });
 

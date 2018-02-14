@@ -43,7 +43,10 @@
           <li class="list-group-item">Preferred roommate: <b>Female</b></li>
           <li class="list-group-item">Occupants: # people</li>
           <li class="list-group-item">Vacancies: # </li>
-          <li class="list-group-item"><a href="mailto:seller@example.com" target="_top"><i class="fa fa-envelope"></i> Contact Seller</a></li>
+          <li class="list-group-item"><a href="mailto:seller@example.com" target="_top"><i class="fa fa-envelope"></i>
+            <%= isOwner ? 'Contact Seller' : 'Contact Me' %>
+        </a>
+        </li>
         </ul>
       </div>
     </div>
