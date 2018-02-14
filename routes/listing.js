@@ -1,7 +1,10 @@
 const Listing = require('../models/listing.js');
 const moment = require('moment');
 const login = require('../routes/login.js');
+const User = require('../models/user.js');
 let router = require('express').Router();
+
+const utilities = ['water','electricity','gas','wifi','heat'];
 
 router.get('/listing/:id', (req, res) => {
 	let id = req.params.id;
@@ -30,6 +33,14 @@ router.post('/listing', (req,res) => {
 		type: 'Point',
 		coordinates: [req.body.latitude, req.body.longitude]
 	};
+	req.body.utilities = [];
+	for (let i=0; i< utilities.length; i++) {
+		if (req.body[utilities[i]] == 'on') {
+			req.body.utilities.push(utilities[i]);
+		}
+	};
+	console.log(req.body.utilities);
+
 	let listing = new Listing(req.body);
 	listing.loc = {
 		type: 'Point',
@@ -40,7 +51,17 @@ router.post('/listing', (req,res) => {
 			console.error(err);
 			res.status(500).send('Failed to save listing: ' + err);
 		} else {
-			res.json({id: listing.id});
+			User.update(
+				{_id: req.user.id},
+				{$push: {listings: listing.id}},
+				(err,message) => {
+					if (err) {
+						res.status(500).json({error: err})
+					} else {
+						res.json({id: listing.id});
+					}
+				}
+			)
 		}
 	});
 });

@@ -92,17 +92,17 @@
         </div>
 
       <div id = "checkboxes">
-        <div class="form-row form-check">
+        <div class="form-check">
           <div>
-            <input class="form-check-input" type="checkbox" name="kitchen" value="True" id="kitchen">
+            <input class="form-check-input" type="checkbox" name="kitchen" id="kitchen">
             <label for="kitchen">Kitchen</label>
           </div>
           <div>
-            <input class="form-check-input" type="checkbox" name="smoking" value="True" id="smoking">
+            <input class="form-check-input" type="checkbox" name="smoking" id="smoking">
             <label for="smoking">Smoking Allowed</label>
           </div>
           <div>
-            <input class="form-check-input" type="checkbox" name="pets" value="True" id="pets">
+            <input class="form-check-input" type="checkbox" name="pets" id="pets">
             <label for="pets">Pets Allowed</label>
           </div>
           <div class="form-control">
@@ -114,6 +114,31 @@
             <label for="Handicap">Handicap Accessible</label>
           </div>
       </div>
+    </div>
+
+
+    <div id="utilties">
+      <div class="form-check">
+        <div>
+          <input class="form-check-input" type="checkbox" name="water" id="water">
+          <label for="water">Water</label>
+        </div>
+        <div>
+          <input class="form-check-input" type="checkbox" name="electricity" id="electricity">
+          <label for="electricity">Electricity</label>
+        </div>
+        <div>
+          <input class="form-check-input" type="checkbox" name="gas" id="gas">
+          <label for="gas">Gas</label>
+        </div>
+        <div>
+          <input class="form-check-input" type="checkbox" name="heat" id="heat">
+          <label for="heat">Heat</label>
+        </div>
+        <div>
+          <input class="form-check-input" type="checkbox" name="wifi" id="wifi">
+          <label for="wifi">Wifi</label>
+        </div>
     </div>
 
     <label class="col-form-label" for="price">Price</label>
@@ -132,6 +157,7 @@
         </div>
       </div>
     </div>
+
 
     <div class="form-group">
       <label for="homePictures">Add photos</label>
@@ -177,19 +203,6 @@
           $('#latitude').val(autocomplete.getPlace().geometry.location.lat());
           $('#longitude').val(autocomplete.getPlace().geometry.location.lng());
         });
-      </script>
-      <script>
-      console.log("Test");
-      var boxes = document.getElementById('checkboxes');
-      var utility_forms = boxes.getElementsByTagName('input');
-      for (var i=0, i<utility_forms.length; i++) {
-          if (utility_forms[i].type === 'checkbox' ) {
-              utility_forms[i].onclick = function() {
-                  Utilities.push(utility_forms[i].name);
-                  console.log("test");
-              }
-          }
-      }
       </script>
 </body>
 
