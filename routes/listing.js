@@ -14,6 +14,18 @@ router.get('/listing/:id', (req, res) => {
 			// if logged in, check if user ID matches the ID of the owner field in the listing
 			// if it does, inject something into EJS that tells it that the owner is looking at the listing
 			//listing.isOwner = true;
+			if (req.user){
+				if (req.user.id == listing.owner.toString()){
+					listing.isOwner = true;
+				}
+				else {
+					listing.isOwner = false;
+				}
+			}
+			else {
+				listing.isOwner = false;
+			}
+
 			listing.moment = moment;
 			listing.active = '';
 
