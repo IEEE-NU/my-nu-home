@@ -43,8 +43,12 @@
           <li class="list-group-item">Preferred roommate: <b>Female</b></li>
           <li class="list-group-item">Occupants: # people</li>
           <li class="list-group-item">Vacancies: # </li>
-          <li class="list-group-item"><a href="mailto:seller@example.com" target="_top"><i class="fa fa-envelope"></i>
-            <%= isOwner ? 'Contact Seller' : 'Contact Me' %>
+          <% if (!isOwner) { %>
+            <li class="list-group-item"><a href="mailto:seller@example.com" target="_top">Contact Seller</a>
+          <% } else { %>
+            <!-- TODO: Ask for confirmation before deleting. -->
+            <li class="list-group-item">No longer available? <a href="#" id="delete-listing">Remove this listing.</a></li>
+          <% } %>
         </a>
         </li>
         </ul>
@@ -80,5 +84,20 @@
   </div>
 
   <% include partials/scripts %>
+  <script type="text/javascript">
+    $('#delete-listing').click(function() {
+      console.log('clicked');
+      $.ajax({
+        type: 'delete',
+        url: '/listing/<%= id %>',
+        success: function(response) {
+          window.location.href = '/user'
+        },
+        error: function(jqXHR, status, err) {
+          // TODO: Handle error adding to database.
+        },
+      });
+    });
+  </script>
 </body>
 </html>

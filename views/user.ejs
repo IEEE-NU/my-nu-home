@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include partials/head %>
+	<title>My NU Home - My Listings</title>
+</head>
+<body>
+	<% include partials/nav %>
+	<div class="container">
+		<h1>My Listings</h1>
+		<% if (listings.length > 0) { %>
+			<ul>
+				<% for (let i = 0; i < listings.length; i++) { %>
+					<li><a href="/listing/<%= listings[i].id %>"><%= listings[i].address %></a></li>
+				<% } %>
+			</ul>
+		<% } else { %>
+			<p>You don't have any listings. <a href="/sell">Make one now!</a></p>
+		<% } %>
+	</div>
+</body>
+</html>

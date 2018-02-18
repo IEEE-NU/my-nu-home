@@ -34,9 +34,10 @@ const listingSchema = mongoose.Schema({
 	size: Number, // square feet
 	startPeriod: Date,
 	utilities: Array,
-	loc : {
-		type: {type:String},
-		coordinates: [Number]},
+	loc: {
+		type: { type: String },
+		coordinates: [ Number ]
+	},
 });
 
 listingSchema.index({loc: '2dsphere'});
