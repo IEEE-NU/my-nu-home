@@ -1,8 +1,17 @@
 const mongoose = require('mongoose');
 const listingSchema = mongoose.Schema({
-	address: String,
-	baths: Number,
-	beds: Number,
+	address: {
+		type: String,
+		required: true,
+	},
+	baths: {
+		type: Number,
+		required: true,
+	},
+	beds: {
+		type: Number,
+		required: true,
+	},
 	blurb: {
 		type: String,
 		trim: true,
@@ -11,10 +20,20 @@ const listingSchema = mongoose.Schema({
 	endPeriod: Date,
 	genderPreferred: {
 		type: String,
-		enum: ['male', 'female', 'none'],
+		enum: ['male', 'female', 'other', 'none'],
 		required: true,
 	},
-	owner: Number,
+	negotiable: {
+		type: Boolean, 
+		required: true,
+	},
+	occupants: {
+		type: Number,
+	},
+	owner: {
+		type: Number,
+		required: true,
+	},
 	parking: {
 		type: String,
 		enum: ['no', 'garage', 'outdoors'],
@@ -24,7 +43,10 @@ const listingSchema = mongoose.Schema({
 		type: Number,
 		required: false,
 	},
-	price: Number,
+	price: {
+		type: Number,
+		required: true,
+	},
 	saleType: {
 		type: String,
 		enum: ['lease', 'sublet'],
@@ -32,11 +54,15 @@ const listingSchema = mongoose.Schema({
 	},
 	smoking: Boolean,
 	size: Number, // square feet
-	startPeriod: Date,
+	startPeriod: {
+		type: Date,
+		required: true,
+	},
 	utilities: Array,
+	vacancies: Number,
 	loc: {
 		type: { type: String },
-		coordinates: [ Number ]
+		coordinates: [ Number ],
 	},
 });
 
