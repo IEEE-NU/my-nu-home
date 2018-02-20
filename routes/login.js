@@ -83,6 +83,7 @@ module.exports.checkAuth = (req, res, next) => {
 	if (req.user) {
 		next();
 	} else {
+    // TODO: Send error on POST request if not authenticated.
 		console.log('Redirecting to login');
 		res.redirect('/login');
 	}

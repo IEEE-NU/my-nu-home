@@ -22,9 +22,9 @@
 - Run the server with `npm start`.
 
 ### TODO
-- [] Individual user accounts
-- [] Update and delete listings
-- [] Pins on Google Maps
+- [x] Individual user accounts
+- [x] Update and delete listings
+- [x] Pins on Google Maps
 - [] Image upload and storage
 - [] Deploy to Heroku
 - [] IF WE HAVE TIME: Filter/Search Functions

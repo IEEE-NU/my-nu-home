@@ -10,14 +10,16 @@ router.get('/listing/:id', (req, res) => {
 	let id = req.params.id;
 	Listing.findById(id, (err, listing) => {
 		if (err) {
+			console.error(err);
 			console.log(`Error retrieving listing with ID ${id}`);
-			res.status(404).send("Requested listing does not exist.");
+			res.status(500).send("Error occurred when attempting to retrieve listing.");
 		} else {
-			// check if the user is logged in
-			// if logged in, check if user ID matches the ID of the owner field in the listing
-			// if it does, inject something into EJS that tells it that the owner is looking at the listing
-			//listing.isOwner = true;
-			if (req.user){
+			if (!listing) {
+				res.status(404).send("Requested listing does not exist.");
+				return;
+			}
+
+			if (req.user) {
 				if (req.user.id == listing.owner.toString()){
 					listing.isOwner = true;
 				}
@@ -31,6 +33,7 @@ router.get('/listing/:id', (req, res) => {
 
 			listing.moment = moment;
 			listing.active = '';
+			listing.loggedIn = req.user !== undefined;
 
 			res.render('../views/listing', listing);
 		}
@@ -38,13 +41,39 @@ router.get('/listing/:id', (req, res) => {
 });
 
 // TODO: DELETE endpoint for listings
-// router.delete('/listing/:id', login.checkAuth, (req, res) => {
-// 	let id = req.params.id;
-// 	Listing.remove({ _id: id, })
-// });
+router.delete('/listing/:id', (req, res) => {
+	let id = req.params.id;
+	Listing.findById(id, (err, listing) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send('Failed to remove listing: ' + err);	
+		} else {
+			console.log(listing);
+			listing.remove((err) => {
+				if (err) {
+					console.error(err);
+					res.status(500).send('Failed to remove listing: ' + err);
+				} else {
+					User.update(
+						{ _id: listing.owner },
+						{ $pull: { listings: { id: listing.id } } }, (err, numAffected) => {
+							if (err) {
+								console.error(err);
+								res.status(500).send('Failed to dissociate listing from user: ' + err);
+							} else {
+								console.log(numAffected + ' removed from user ' + listing.owner);
+								res.status(200).send();
+							}
+						}
+					);
+				}
+			});
+		}
+	});
+});
 
 router.post('/listing', (req,res) => {
-	console.log(req.body);
+	// console.log(req.body);
 	//TODO: Extra validation.
 	req.body.loc = {
 		type: 'Point',
@@ -56,13 +85,16 @@ router.post('/listing', (req,res) => {
 			req.body.utilities.push(utilities[i]);
 		}
 	};
-	console.log(req.body.utilities);
 
 	let listing = new Listing(req.body);
 	listing.loc = {
 		type: 'Point',
 		coordinates: [ req.body.latitude, req.body.longitude ],
 	};
+
+	console.log(req.user);
+	listing.owner = req.user.id;
+
 	listing.save((err, listing) => {
 		if (err) {
 			console.error(err);
@@ -70,7 +102,10 @@ router.post('/listing', (req,res) => {
 		} else {
 			User.update(
 				{_id: req.user.id},
-				{$push: {listings: listing.id}},
+				{$push: {listings: {
+					id: listing.id,
+					address: listing.address,
+				}}},
 				(err,message) => {
 					if (err) {
 						res.status(500).json({error: err})
