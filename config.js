@@ -21,11 +21,14 @@ config.session = {
 	secret: process.env[prefix + category + 'SECRET'] || 'keyboard cat',
 }
 
-// OAUTH
+// OAUTH and BUCKETS
 category = 'GOOGLE_';
 config.google = {
 	id: process.env[prefix + category + 'ID'],
 	secret: process.env[prefix + category + 'SECRET'],
+	project: process.env[prefix + category + 'PROJECT'],
+	bucket: process.env[prefix + category + 'CLOUD_BUCKET'],
+	appCredentials: process.env[prefix + category + 'APPLICATION_CREDENTIALS'],
 }
 
 module.exports = config;
