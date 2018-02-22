@@ -12,3 +12,31 @@ $('#sell-form').submit(function(event) {
 	});
 	event.preventDefault();
 });
+
+let $saleType = $('#saleType'),
+	$occupants = $('#occupants'),
+	$vacancies = $('#vacancies');
+
+$saleType.change(function() {
+	if ($saleType.val() == 'lease') {
+		$('#occupants-field').hide();
+		$('#vacancies-field').hide();
+		$occupants.val('');
+		$vacancies.val('');
+	} else {
+		$('#occupants-field').show();
+		$('#vacancies-field').show();
+	}
+}).trigger('change');
+
+let $parking = $('#parking'),
+	$parkingCost = $('#parkingCost');
+
+$parking.change(function() {
+	if ($parking.val() === 'no') {
+		$('#parkingCost-field').hide();
+		$parkingCost.val('');
+	} else {
+		$('#parkingCost-field').show();
+	}
+}).trigger('change');

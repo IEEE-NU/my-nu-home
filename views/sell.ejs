@@ -13,7 +13,7 @@
   <div class="container mt-2">
     <form id="sell-form" action="/listing" method="post">
       <div class="form-row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
           <label for="saleType" class="col-form-label">Lease or Sublet?</label>
           <select class="form-control" id="saleType" name="saleType">
             <option value="lease">Lease</option>
@@ -21,11 +21,11 @@
           </select>
         </div>
 
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
           <label for="startPeriod" class="col-form-label">From (required):</label>
           <input class="form-control" name="startPeriod" type="date" value="" id="startPeriod" required>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
           <label for="example-date-input" class="col-form-label">Until (optional):</label>
           <input class="form-control" name="endPeriod" type="date" value="" id="endPeriod">
         </div>
@@ -40,15 +40,15 @@
       <input id="longitude" name="longitude" type="hidden">
 
       <div class="form-row">
-        <div class="form-group col-md-4">
+        <div id="occupants-field" class="form-group col-md-3">
           <label for="occupants">Total # of Occupants</label>
-          <input class="form-control" name="occupants" type="number">
+          <input id="occupants" class="form-control" name="occupants" type="number" min="1" step="1">
         </div>
-        <div class="form-group col-md-4">
-          <label for="vacancies">Vacancies</label>
-          <input class="form-control" name="vacancies" type="number">
+        <div id="vacancies-field" class="form-group col-md-3">
+          <label for="vacancies"># of Subletters Desired</label>
+          <input id="vacancies" class="form-control" name="vacancies" type="number" min="1" step"1">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
           <label for="genderPreferred">Gender Preferred</label>
           <select class="form-control" id="genderPreferred" name="genderPreferred">
             <option value="male">Male</option>
@@ -60,45 +60,46 @@
       </div>
 
       <div class="form-row">
-       <div class="form-group col-md-6">
-        <label for="beds">Bedrooms</label>
-        <select class="form-control" id="beds" name="beds" required>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8+</option>
-        </select>
+        <div class="form-group col-md-3">
+          <label for="beds">Bedrooms</label>
+          <select class="form-control" id="beds" name="beds" required>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8+</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="baths">Baths</label>
+          <select class="form-control" id="baths" name="baths" required>
+            <option>1</option>
+            <option>1.5</option>
+            <option>2</option>
+            <option>2.5</option>
+            <option>3+</option>
+          </select>
+        </div>
       </div>
 
-      <div class="form-group col-md-6">
-        <label for="baths">Baths</label>
-        <select class="form-control" id="baths" name="baths" required>
-          <option>1</option>
-          <option>1.5</option>
-          <option>2</option>
-          <option>2.5</option>
-          <option>3+</option>
-        </select>
-      </div>
-    </div>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="parking">Parking Available</label>
+          <select class="form-control" id="parking" name="parking">
+            <option value="no">None</option>
+            <option value="garage">Garage</option>
+            <option value="outdoors">Outdoors</option>
+          </select>
+        </div>
 
-      
-
-     
-
-      
-
-      <div class="form-group">
-        <label for="parking">Parking Available</label>
-        <select class="form-control" id="parking" name="parking">
-          <option value="no">None</option>
-          <option value="garage">Garage</option>
-          <option value="outdoors">Outdoors</option>
-        </select>
+        <div id="parkingCost-field" class="form-group col-md-3">
+          <label for="parkingCost">Parking Cost (optional)</label>
+          <input class="form-control" id="parkingCost" name="parkingCost" placeholder="$/month">
+        </div>        
       </div>
 
       <div id="checkboxes">
