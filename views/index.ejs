@@ -2,10 +2,12 @@
 <html>
 
 <head>
-	<% include partials/head %>
+		<% include partials/head %>
 		<title>My NU Home</title>
-		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 		<link rel="stylesheet" href="css/index.css">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+		
+
 </head>
 
 <body>
@@ -16,16 +18,27 @@
 			</div>
 			<% } %>
 				<% } %>
-					<div class="countainer-fluid">
-						<div class="background">
-							<div id="background photo">
-								<img src="https://static.pexels.com/photos/323705/pexels-photo-323705.jpeg" width="100%">
-							</div>
+					<div class="bg">
+						
+					</div>
+
+					
+					<div class="container-fluid">
 							<div class="front-page-text">
-								<h1> My NU Home</h1>
-								<div id="buttons">
-									<a id="left-button"class="btn btn-primary btn-lg" href="/list" role="button">Buyers</a>
-									<a id="right-button" class="btn btn-primary btn-lg" href="/sell" role="button">Sellers</a>
+								<div class="row">
+									<div class="col-6"></div>
+									<div class="col-6">
+										<h1> My NU Home</h1>
+									</div>
+								</div>
+								<div class="row" id="buttons">
+									<div class="col-6"></div>
+									<div class="col-3">
+										<a id="left-button" class="btn btn-primary btn-lg" href="/list" role="button">Buyers</a>
+									</div>
+									<div class="col-3">
+										<a id="right-button" class="btn btn-primary btn-lg" href="/sell" role="button">Sellers</a>
+									</div>
 								</div>
 							</div>
 
