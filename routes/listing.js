@@ -2,6 +2,7 @@ const Listing = require('../models/listing.js');
 const moment = require('moment');
 const login = require('../routes/login.js');
 const User = require('../models/user.js');
+const image = require('../models/image.js');
 let router = require('express').Router();
 
 const utilities = ['water','electricity','gas','wifi','heat'];
@@ -18,6 +19,14 @@ router.get('/listing/:id', (req, res) => {
 				res.status(404).send("Requested listing does not exist.");
 				return;
 			}
+
+			listing.imageLinks = [];
+			console.log(listing.imageNumber);
+			for(let i = 0; i < listing.imageNumber; i++){
+				listing.imageLinks.push("http://staging.my-nu-home-1513614055126.appspot.com.storage.googleapis.com/" + id +  i);
+			}
+			console.log(listing.imageLinks);
+
 
 			if (req.user) {
 				if (req.user.id == listing.owner.toString()){

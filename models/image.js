@@ -4,21 +4,11 @@ const config = require('../config.js');
 
 // Your Google Cloud Platform project ID
 const projectId = config.google.project;
+const bucketName = config.google.bucket;
 
 // Creates a client
 const storage = new Storage({
   projectId: projectId,
 });
 
-// The name for the new bucket
-const bucketName = 'my-new-bucket-cschen13';
-
-// Creates the new bucket
-storage
-  .createBucket(bucketName)
-  .then(() => {
-    console.log(`Bucket ${bucketName} created.`);
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
-  });
+module.exports = storage.bucket(bucketName);

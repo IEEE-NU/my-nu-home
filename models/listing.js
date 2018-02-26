@@ -38,6 +38,10 @@ const listingSchema = mongoose.Schema({
 		type: { type: String },
 		coordinates: [ Number ]
 	},
+	imageNumber: {
+		type: Number,
+		required: true,
+	}
 });
 
 listingSchema.index({loc: '2dsphere'});
