@@ -3,8 +3,9 @@
 
 <head>
 	<% include partials/head %>
-	<title>My NU Home</title>
-	<link rel="stylesheet" href="css/index.css">
+		<title>My NU Home</title>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+		<link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
@@ -13,24 +14,24 @@
 			<div class="alert alert-danger" role="alert">
 				<%= errors[i] %>
 			</div>
-		<% } %>
-	<% } %>
-	<div class = "countainer-fluid">
-		<div class="background">
-			<div id="background photo">
-				<img src="https://static.pexels.com/photos/205321/pexels-photo-205321.png" width = "100%">
-			</div>
-	    	<div class="buttons">
-	    			<h1> <span class="rest"> My </span> <span id="NU"> NU </span> <span class="rest"> Home </span > </h1>
-    				<a class="btn btn-primary btn-lg" href="/list" role="button">Buyers</a>
-    				<a class="btn btn-primary btn-lg" href="/sell" role="button">Sellers</a>
-    		</div>
-    	</div>
+			<% } %>
+				<% } %>
+					<div class="countainer-fluid">
+						<div class="background">
+							<div id="background photo">
+								<img src="https://static.pexels.com/photos/323705/pexels-photo-323705.jpeg" width="100%">
+							</div>
+							<div class="front-page-text">
+								<h1> My NU Home</h1>
+								<div id="buttons">
+									<a id="left-button"class="btn btn-primary btn-lg" href="/list" role="button">Buyers</a>
+									<a id="right-button" class="btn btn-primary btn-lg" href="/sell" role="button">Sellers</a>
+								</div>
+							</div>
 
-    	<h1> About My NU Home </h1>
-    	<p> blah </p>
-	</div>
+							<h1> About My NU Home </h1>
+							<p> blah </p>
+						</div>
 </body>
-</html>
 
-	
+</html>
