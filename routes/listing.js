@@ -23,7 +23,7 @@ router.get('/listing/:id', (req, res) => {
 			listing.imageLinks = [];
 			console.log(listing.imageNumber);
 			for(let i = 0; i < listing.imageNumber; i++){
-				listing.imageLinks.push("http://staging.my-nu-home-1513614055126.appspot.com.storage.googleapis.com/" + id +  i);
+				listing.imageLinks.push(`http://staging.my-nu-home-1513614055126.appspot.com.storage.googleapis.com/${id}/${i}`);
 			}
 			console.log(listing.imageLinks);
 
@@ -100,6 +100,9 @@ router.post('/listing', (req,res) => {
 		type: 'Point',
 		coordinates: [ req.body.latitude, req.body.longitude ],
 	};
+
+	// TODO: Grab this number from the form.
+	listing.imageNumber = 2;
 
 	console.log(req.user);
 	listing.owner = req.user.id;

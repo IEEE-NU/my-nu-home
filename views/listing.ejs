@@ -12,18 +12,16 @@
       <div class="col-md-6 mb-3">
         <div id="listingPhotos" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
-            <li data-target="#listingPhotos" data-slide-to="0" class="active"></li>
-            <li data-target="#listingPhotos" data-slide-to="1"></li>
+            <% for(let i = 0; i < imageLinks.length; i++) { %>
+              <li data-target="#listingPhotos" data-slide-to="<%= i %>" class="<%= i == 0 ? 'active' : '' %>"></li>
+            <% } %>
           </ol>
           <div class="carousel-inner">
-
-
-            <% for(let i = 0; i < imageLinks.length; i++){ %>
-            <div class="carousel-item">
-              <img class="d-block w-100" src= "<%= imageLinks[i] %>">
-            </div>
-             <% } %>
-
+            <% for(let i = 0; i < imageLinks.length; i++) { %>
+              <div class="carousel-item <%= i == 0 ? 'active' : '' %>">
+                <img class="d-block w-100" src="<%= imageLinks[i] %>">
+              </div>
+            <% } %>
           </div>
           <a class="carousel-control-prev" href="#listingPhotos" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
