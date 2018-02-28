@@ -3,9 +3,16 @@ const moment = require('moment');
 const login = require('../routes/login.js');
 const User = require('../models/user.js');
 const image = require('../models/image.js');
+const Multer = require('multer');
 let router = require('express').Router();
 
 const utilities = ['water','electricity','gas','wifi','heat'];
+const multer = Multer({
+  storage: Multer.memoryStorage(),
+  limits: {
+    fileSize: 10 * 1024 * 1024 // no larger than 10mb
+  }
+});
 
 router.get('/listing/:id', (req, res) => {
 	let id = req.params.id;
@@ -81,8 +88,10 @@ router.delete('/listing/:id', (req, res) => {
 	});
 });
 
-router.post('/listing', (req,res) => {
-	// console.log(req.body);
+router.post('/listing', (req, res) => {
+	console.log(req.body);
+	console.log(req.file);
+	console.log(req.files);
 	//TODO: Extra validation.
 	req.body.loc = {
 		type: 'Point',
@@ -104,7 +113,7 @@ router.post('/listing', (req,res) => {
 	// TODO: Grab this number from the form.
 	listing.imageNumber = 2;
 
-	console.log(req.user);
+	// console.log(req.user);
 	listing.owner = req.user.id;
 
 	listing.save((err, listing) => {
@@ -128,6 +137,16 @@ router.post('/listing', (req,res) => {
 			)
 		}
 	});
+});
+
+router.post('/images', multer.array('images'), (req, res, next) => {
+	if (req.files) {
+		console.log(req.files);
+		res.status(200).send();
+	} else {
+		console.log("pls");
+		res.status(500).send();
+	}
 });
 
 router.get('/listing/:id/edit', login.checkAuth, (req, res) => {
