@@ -180,30 +180,31 @@
     </div>
 
     <% include partials/scripts %>
-      <script type="text/javascript" src="scripts/sell.js"></script>
-      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-kBHXUoCNljHmmK6vjWEXv09zn1d_TKI&libraries=places"></script>
-      <script>
-        var defaultBounds = new google.maps.LatLngBounds(
-          new google.maps.LatLng(41.493268, -88.273689),
-          new google.maps.LatLng(42.595220, -87.299839),
-        );
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+    <script type="text/javascript" src="scripts/sell.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-kBHXUoCNljHmmK6vjWEXv09zn1d_TKI&libraries=places"></script>
+    <script>
+      var defaultBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(41.493268, -88.273689),
+        new google.maps.LatLng(42.595220, -87.299839),
+      );
 
-        var input = document.getElementById('address');
-        var options = {
-          bounds: defaultBounds,
-          types: ['address']
-        };
+      var input = document.getElementById('address');
+      var options = {
+        bounds: defaultBounds,
+        types: ['address']
+      };
 
-      autocomplete = new google.maps.places.Autocomplete(input, options);
-      </script>
-      <script>
-        google.maps.event.addListener(autocomplete, 'place_changed', function() {
-          var place = [autocomplete.getPlace().geometry.location.lat(), autocomplete.getPlace().geometry.location.lng()];
-          console.log(place);
-          $('#latitude').val(autocomplete.getPlace().geometry.location.lat());
-          $('#longitude').val(autocomplete.getPlace().geometry.location.lng());
-        });
-      </script>
+    autocomplete = new google.maps.places.Autocomplete(input, options);
+    </script>
+    <script>
+      google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = [autocomplete.getPlace().geometry.location.lat(), autocomplete.getPlace().geometry.location.lng()];
+        console.log(place);
+        $('#latitude').val(autocomplete.getPlace().geometry.location.lat());
+        $('#longitude').val(autocomplete.getPlace().geometry.location.lng());
+      });
+    </script>
 </body>
 
 </html>
