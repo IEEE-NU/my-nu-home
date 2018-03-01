@@ -15,17 +15,18 @@ $('#sell-form').submit(function(event) {
 
 let $saleType = $('#saleType'),
 	$occupants = $('#occupants'),
-	$vacancies = $('#vacancies');
+	$vacancies = $('#vacancies'),
+	$genderPreferred = $('#genderPreferred'),
+	$subletDetails = $('#sublet-details');
 
 $saleType.change(function() {
 	if ($saleType.val() == 'lease') {
-		$('#occupants-field').hide();
-		$('#vacancies-field').hide();
+		$subletDetails.hide();
 		$occupants.val('');
 		$vacancies.val('');
+		$genderPreferred.val('none');
 	} else {
-		$('#occupants-field').show();
-		$('#vacancies-field').show();
+		$subletDetails.show();
 	}
 }).trigger('change');
 
@@ -38,5 +39,17 @@ $parking.change(function() {
 		$parkingCost.val('');
 	} else {
 		$('#parkingCost-field').show();
+	}
+}).trigger('change');
+
+let $pets = $('#pets'),
+	$petsCost = $('#petsCost');
+
+$pets.change(function() {
+	if ($pets.val() === 'no') {
+		$('#petsCost-field').hide();
+		$petsCost.val('');
+	} else {
+		$('#petsCost-field').show();
 	}
 }).trigger('change');
