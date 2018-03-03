@@ -1,5 +1,8 @@
-label,h1,h2 {
+
+
+body {
   color: #214d7d;
+  font-family: 'Montserrat';
 }
 
 #sell-form {
@@ -8,4 +11,15 @@ label,h1,h2 {
 
 .form-section {
 	margin-bottom: 2em;
+}
+
+#submit-button {
+	background-color: #214d7d;
+	border-color: #214d7d;
+}
+
+#submit-button:hover {
+	background-color: white;
+	border-color: #214d7d;
+	color: #214d7d;
 }

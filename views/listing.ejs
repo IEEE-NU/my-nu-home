@@ -2,12 +2,19 @@
 <html>
 <head>
    	<% include partials/head %>
+    <link rel="stylesheet"  href="/css/listing.css">
     <title><%= address %> - <%= moment(startPeriod).format('MMM YYYY'); %></title>
 </head>
 <body>
   <% include partials/nav %>
   <div class="container">
     <h1><%= address %></h1>
+    <h3>Description</h3>
+    <% if (blurb=='') { %>
+      <p>No description provided by seller</p>
+    <% } else { %>
+      <p><%= blurb %></p>
+    <% } %>
     <div class="row">
       <div class="col-md-6 mb-3">
         <div id="listingPhotos" class="carousel slide" data-ride="carousel">
@@ -38,7 +45,7 @@
         <ul class="list-group">
           <li class="list-group-item">Rent: $<%= price %>/month</li>
           <li class="list-group-item">Address: <%= address %></li>
-          <li class="list-group-item">Type: <%= saleType %></li>
+          <li style="text-transform: capitalize" class="list-group-item">Type: <%= saleType %></li>
           <li class="list-group-item">Available Starting: <%= moment(startPeriod).format('MMM YYYY'); %></li>
           <li class="list-group-item">Preferred gender:
             <% if (genderPreferred == 'male') { %>
@@ -68,17 +75,16 @@
     </div>
 
     <main>
-      <p><%= blurb %></p>
       <h2>More Details</h2>
       <div class="row">
         <div class="col-md-4">
-          <p>Apartment Size: XXXX square feet</p>
+          <p style="text-transform: capitalize">Apartment Size: XXXX square feet</p>
           <p># of Bedrooms: <%= beds ? beds : 'Unknown' %></p>
           <p># of Baths: <%= baths ? baths : 'Unknown' %></p>
         </div>
         <div class="col-md-4">
-          <p>Utilities Included: <%= utilities.length > 0 ? utilities.join(', ') : 'None' %></p>
-          <p>Parking Available: <%= parking ? parking : 'Unknown' %><%= parkingCost ? (', $' + parkingCost) : '' %></p>
+          <p style="text-transform: capitalize">Utilities Included: <%= utilities.length > 0 ? utilities.join(', ') : 'None' %></p>
+          <p style="text-transform: capitalize">Parking Available: <%= parking ? parking : 'Unknown' %><%= parkingCost ? (', $' + parkingCost) : '' %></p>
           <p>Smoking:
             <% if (smoking !== undefined) { %>
               <%= smoking ? 'Yes' : 'No' %>
@@ -89,7 +95,6 @@
         </div>
         <div class="col-md-4">
           <p>Pets: <%= petsCost ? ('$' + petsCost) : 'No' %></p>
-          <p><a href="#">Visit Website</a></p>
         </div>
       </div>
     </main>
