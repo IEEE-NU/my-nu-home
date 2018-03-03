@@ -7,7 +7,9 @@ const config = require('../config.js');
 passport.use(new GoogleStrategy({
     clientID: config.google.id,
     clientSecret: config.google.secret,
-    callbackURL: "http://localhost:8080/login/callback"
+    callbackURL: process.env.NODE_ENV === 'production'
+      ? 'https://my-nu-home-1513614055126.appspot.com/login/callback'
+      : 'http://localhost:8080/login/callback'
   },
   function(accessToken, refreshToken, profile, done) {
   	console.log("Logged in with Google OAuth");
