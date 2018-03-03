@@ -101,19 +101,14 @@ router.post('/listing', multer.array('images'), (req, res, next) => {
 		}
 	}
 
-	if (!req.body.imageNumber){
-		req.body.imageNumber = 0;
-	}
-
-	if (!req.body.negotiable){
+	if (!req.body.negotiable) {
 		req.body.negotiable = false;
 	}
 	
 	let listing = new Listing(req.body);
 	listing.owner = req.user.id;
-	
-	if (req.files){
-		req.body.imageNumber = req.files.length;
+	if (req.files) {
+		listing.imageNumber = req.files.length;
 		for (let i=0; i < req.files.length;i++){
 			const blob = image.file(listing._id + "/" + i.toString());
 			const blobStream = blob.createWriteStream({
@@ -121,25 +116,24 @@ router.post('/listing', multer.array('images'), (req, res, next) => {
 					contentType: req.files[i].mimetype,
 				}
 			});
-		}
 
-		blobStream.on('error', (err) => {
-			console.log("errorthing");
-			console.log(err);
-	    	next(err);
-	    	return;
-	  	});
+			blobStream.on('error', (err) => {
+				console.log("errorthing");
+				console.log(err);
+		    	next(err);
+		    	return;
+		  	});
 
-	  	 {
 	  		blobStream.on('finish', () => {
 	  			if (i === req.files.length - 1) {
 		  			savelisting(listing, res, req);
 		  		}
-  			})};
+			});
+			blobStream.end(req.files[i].buffer);
+		}
 
-		blobStream.end(req.files[i].buffer);
-	}
-	else {
+	} else {
+		listing.imageNumber = 0;
 		savelisting(listing, res, req);
 	}
 });
@@ -150,8 +144,7 @@ function savelisting(listing, res, req){
 		if (err) {
 			console.error(err);
 			res.status(500).send('Failed to save listing: ' + err);
-		} 
-		else {
+		} else {
 			User.update(
 				{_id: req.user.id},
 				{$push: {listings: {
