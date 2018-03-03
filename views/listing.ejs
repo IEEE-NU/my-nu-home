@@ -39,10 +39,22 @@
           <li class="list-group-item">Price: <%= price %></li>
           <li class="list-group-item">Address: <%= address %></li>
           <li class="list-group-item">Type: <%= saleType %></li>
-          <li class="list-group-item">Rental Period: Winter Quarter</li>
-          <li class="list-group-item">Preferred roommate: <b>Female</b></li>
-          <li class="list-group-item">Occupants: # people</li>
-          <li class="list-group-item">Vacancies: # </li>
+          <li class="list-group-item">Available Starting: <%= moment(startPeriod).format('MMM YYYY'); %></li>
+          <li class="list-group-item">Preferred gender:
+            <% if (genderPreferred == 'male') { %>
+              <b>Male</b>
+            <% } else if (genderPreferred == 'female') { %>
+              <b>Female</b>
+            <% } else if (genderPreferred == 'other') { %>
+              <b>Other (See description or contact owner)</b>
+            <% } else { %>
+              <b>No preference</b>
+            <% } %>
+            <b>Female</b></li>
+          <% if (saleType == 'sublet') { %>
+            <li class="list-group-item"># of Existing Occupants: <%= occupants ? occupants : 'Not Specified' %></li>
+            <li class="list-group-item">Vacancies: <%= vacancies ? vacancies : 'Not Specified' %></li>
+          <% } %>
           <% if (!isOwner) { %>
             <li class="list-group-item"><a href="mailto:seller@example.com" target="_top">Contact Seller</a>
           <% } else { %>

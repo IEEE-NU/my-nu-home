@@ -3,207 +3,226 @@
 
 <head>
   <% include partials/head %>
-    <link rel="stylesheet" href="css/sell.css">
-    <title>List Your Apartment</title>
+  <link rel="stylesheet" href="css/sell.css">
+  <title>List Your Apartment</title>
 </head>
 
 <body>
   <% include partials/nav %>
-    <h1 style="text-align: center">Listing your place has never been easier.</h1>
-    <h2 style="text-align: center">And it only takes 10 minutes.</h2>
-    <div class="container mt-2">
-      <form id="sell-form" action="/listing" method="post">
-        <div class="form-group">
-          <label for="description">Description (Short paragraph)</label>
-          <textarea class="form-control" id="description" name="blurb" rows="3" placeholder="300 character max..."></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="saleType">Lease or Sublet?</label>
-          <select class="form-control" id="saleType" name="saleType">
-          <option value="lease">Lease</option>
-          <option value="sublet">Sublet</option>
-        </select>
-        </div>
-
-        <div class="form-group">
-          <label for="genderPreferred">Gender Preferred</label>
-          <select class="form-control" id="genderPreferred" name="genderPreferred">
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="none">None</option>
-        </select>
-        </div>
-
-        <p>Rental Period</p>
-        <div class="form-group row">
-          <label for="startPeriod" class="col-2 col-form-label">From:</label>
-          <div class="col-6">
-            <input class="form-control" name="startPeriod" type="date" value="" id="startPeriod">
+  <div class="container mt-2">
+    <h1>Let's get started.</h1>
+    <form id="sell-form" action="/listing" method="post">
+      <div class="form-section">
+        <h2>The Basics</h2>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="saleType" class="col-form-label">Lease or Sublet?</label>
+            <select class="form-control" id="saleType" name="saleType">
+              <option value="lease">Lease</option>
+              <option value="sublet">Sublet</option>
+            </select>
           </div>
         </div>
-        <div class="form-group row">
-          <label for="example-date-input" class="col-2 col-form-label">Until:</label>
-          <div class="col-6">
+
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="startPeriod" class="col-form-label">From (required):</label>
+            <input class="form-control" name="startPeriod" type="date" value="" id="startPeriod" required>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="example-date-input" class="col-form-label">Until (optional):</label>
             <input class="form-control" name="endPeriod" type="date" value="" id="endPeriod">
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="address">Address</label>
-          <input class="form-control" id="address" name="address" placeholder="1999 Campus Dr.">
+        <div class="form-row">
+          <div class="form-group col-lg-6">
+            <label for="address">Address</label>
+            <input class="form-control" id="address" name="address" placeholder="1999 Campus Dr." required aria-describedby="addressHelp">
+            <small id="addressHelp" class="form-text text-muted">
+              Please select from the auto-complete as you type.
+            </small>
+          </div>
         </div>
-
         <input id="latitude" name="latitude" type="hidden">
         <input id="longitude" name="longitude" type="hidden">
 
-        <div class="form-group">
-          <label for="beds">Bedrooms</label>
-          <select class="form-control" id="beds" name="beds">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8+</option>
-        </select>
-        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="beds">Bedrooms</label>
+            <select class="form-control" id="beds" name="beds" required>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8+</option>
+            </select>
+          </div>
 
-        <div class="form-group">
-          <label for="baths">Baths</label>
-          <select class="form-control" id="baths" name="baths">
-            <option>1</option>
-            <option>1.5</option>
-            <option>2</option>
-            <option>2.5</option>
-            <option>3+</option>
-          </select>
+          <div class="form-group col-md-3">
+            <label for="baths">Baths</label>
+            <select class="form-control" id="baths" name="baths" required>
+              <option>1</option>
+              <option>1.5</option>
+              <option>2</option>
+              <option>2.5</option>
+              <option>3+</option>
+            </select>
+          </div>
         </div>
+      </div>
 
-        <div class="form-group">
-          <label for="parking">Parking</label>
-          <select class="form-control" id="parking" name="parking">
-            <option value="no">None</option>
-            <option value="garage">Garage</option>
-            <option value="outdoors">Outdoors</option>
-          </select>
+      <div id="sublet-details" class="form-section">
+        <h2>Sublet Details</h2>
+        <div class="form-row">
+          <div id="occupants-field" class="form-group col-md-3">
+            <label for="occupants">Total # of occupants</label>
+            <input id="occupants" class="form-control" name="occupants" type="number" min="1" step="1">
+          </div>
+          <div id="vacancies-field" class="form-group col-md-3">
+            <label for="vacancies"># of subletters desired</label>
+            <input id="vacancies" class="form-control" name="vacancies" type="number" min="1" step"1">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="genderPreferred">Gender preferred</label>
+            <select class="form-control" id="genderPreferred" name="genderPreferred" aria-describedby="genderPreferredHelp">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+              <option selected value="none">None</option>
+            </select>
+            <small id="genderPreferredHelp" class="form-text text-muted">
+              If "Other," please add remarks in the description at the bottom of the page.
+            </small>
+          </div>
         </div>
+      </div>
 
-      <div id = "checkboxes">
+      <div class="form-section">
+        <h2>$$$</h2>
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <label class="col-form-label" for="price">Rent Price</label>
+            <input class="form-control" id="price" name="price" placeholder="$/Month" required>
+          </div>
+        </div>
         <div class="form-check">
-          <div>
-            <input class="form-check-input" type="checkbox" name="kitchen" id="kitchen">
-            <label for="kitchen">Kitchen</label>
-          </div>
-          <div>
-            <input class="form-check-input" type="checkbox" name="smoking" id="smoking">
-            <label for="smoking">Smoking Allowed</label>
-          </div>
-          <div>
-            <input class="form-check-input" type="checkbox" name="pets" id="pets">
-            <label for="pets">Pets Allowed</label>
-          </div>
-          <div class="form-control">
-            <label for="petsCost">Pet Cost (Optional) $<label>
-            <input id="petsCost" type="number">
-          </div>
-          <div>
-            <input class="form-check-input" type="checkbox" name="Handicap" value="True" id="Handicap">
-            <label for="Handicap">Handicap Accessible</label>
-          </div>
-      </div>
-    </div>
-
-
-    <div id="utilties">
-      <div class="form-check">
-        <div>
+          <input class="form-check-input" type="checkbox" name="negotiable" id="negotiable">
+          <label for="negotiable">Price negotiable</label>
+        </div>
+        <div class="form-check">
           <input class="form-check-input" type="checkbox" name="water" id="water">
-          <label for="water">Water</label>
+          <label for="water">Water included</label>
         </div>
-        <div>
+        <div class="form-check">
           <input class="form-check-input" type="checkbox" name="electricity" id="electricity">
-          <label for="electricity">Electricity</label>
+          <label for="electricity">Electricity included</label>
         </div>
-        <div>
+        <div class="form-check">
           <input class="form-check-input" type="checkbox" name="gas" id="gas">
-          <label for="gas">Gas</label>
+          <label for="gas">Gas included</label>
         </div>
-        <div>
+        <div class="form-check">
           <input class="form-check-input" type="checkbox" name="heat" id="heat">
-          <label for="heat">Heat</label>
+          <label for="heat">Heat included</label>
         </div>
-        <div>
+        <div class="form-check">
           <input class="form-check-input" type="checkbox" name="wifi" id="wifi">
-          <label for="wifi">Wifi</label>
-        </div>
-    </div>
-
-    <label class="col-form-label" for="price">Price</label>
-    <div class="form-row">
-      <div class="form-group col-md-4">
-        <input class="form-control" id="price" name="price" placeholder="Rent/Month">
-      </div>
-      <div class="col-md-8">
-        <div class="form-check-inline">
-          <input class="form-check-input" type="radio" name="negotiable" id="negotiable" value="yes" checked>
-          <label class="form-check-label" for="negotiable">Negotiable</label>
-        </div>
-        <div class="form-check-inline">
-          <input class="form-check-input" type="radio" name="negotiable" id="non-negotiable" value="no">
-          <label class="form-check-label" for="non-negotiable">Non-negotiable</label>
+          <label for="wifi">Wi-Fi included</label>
         </div>
       </div>
-    </div>
 
+      <div id="checkboxes" class="form-section">
+        <h2>Miscellaneous</h2>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="parking">Parking available</label>
+            <select class="form-control" id="parking" name="parking">
+              <option value="no">None</option>
+              <option value="garage">Garage</option>
+              <option value="outdoors">Outdoors</option>
+            </select>
+          </div>
+          <div id="parkingCost-field" class="form-group col-md-3">
+            <label for="parkingCost">Parking cost (optional)</label>
+            <input class="form-control" id="parkingCost" name="parkingCost" type="number" placeholder="$/month">
+          </div>        
+        </div>
 
-    <div class="form-group">
-      <label for="homePictures">Add photos</label>
-      <input type="file" class="form-control-file" id="homePictures" multiple>
-    </div>
-    <div class="form-group form-row">
-      <label for="telephone" class="col-md-4 col-form-label">Telephone Number</label>
-      <div class="col-md-4">
-        <input class="form-control" type="tel" value="" id="telephone" placeholder="1-(555)-555-5555">
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="pets">Pets allowed</label>
+            <select class="form-control" id="pets" name="pets">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+          <div id="petsCost-field" class="form-group col-md-3">
+            <label for="petsCost">Pets cost (optional)</label>
+            <input class="form-control" id="petsCost" name="petsCost" type="number" placeholder="$/month per pet">
+          </div>        
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="smoking" id="smoking">
+          <label for="smoking">Smoking allowed</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="Handicap" value="True" id="Handicap">
+          <label for="Handicap">Handicap accessible</label>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2">
-        <label class="form-check-label" for="invalidCheck2">I Agree to the terms and conditions</label>
+
+      <div class="form-section">
+        <h2>Description</h2>
+        <div class="form-group">
+          <label for="homePictures">Add photos (up to 5, no larger than 25MB each, optional)</label>
+          <input type="file" class="form-control-file" id="homePictures" multiple>
+        </div>
+        <div class="form-group">
+          <label for="blurb">Describe your place... (optional)</label>
+          <textarea class="form-control" id="blurb" name="blurb" rows="3" placeholder="Amenities, special circumstances, places nearby..." aria-describedby="blurbHelp"></textarea>
+          <small id="blurbHelp" class="form-text text-muted">
+            300 characters maximum
+          </small>
+        </div>
+<!--         <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2">
+            <label class="form-check-label" for="invalidCheck2">I Agree to the terms and conditions</label>
+          </div>
+        </div> -->
       </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Post Listing</button>
     </form>
-    </div>
+  </div>
 
-    <% include partials/scripts %>
-      <script type="text/javascript" src="scripts/sell.js"></script>
-      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-kBHXUoCNljHmmK6vjWEXv09zn1d_TKI&libraries=places"></script>
-      <script>
-        var defaultBounds = new google.maps.LatLngBounds(
-          new google.maps.LatLng(41.493268, -88.273689),
-          new google.maps.LatLng(42.595220, -87.299839),
-        );
+  <% include partials/scripts %>
+  <script type="text/javascript" src="scripts/sell.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-kBHXUoCNljHmmK6vjWEXv09zn1d_TKI&libraries=places"></script>
+  <script>
+    var defaultBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(41.493268, -88.273689),
+      new google.maps.LatLng(42.595220, -87.299839),
+    );
 
-        var input = document.getElementById('address');
-        var options = {
-          bounds: defaultBounds,
-          types: ['address']
-        };
+    var input = document.getElementById('address');
+    var options = {
+      bounds: defaultBounds,
+      types: ['address']
+    };
 
-      autocomplete = new google.maps.places.Autocomplete(input, options);
-      </script>
-      <script>
-        google.maps.event.addListener(autocomplete, 'place_changed', function() {
-          var place = [autocomplete.getPlace().geometry.location.lat(), autocomplete.getPlace().geometry.location.lng()];
-          console.log(place);
-          $('#latitude').val(autocomplete.getPlace().geometry.location.lat());
-          $('#longitude').val(autocomplete.getPlace().geometry.location.lng());
-        });
-      </script>
+    autocomplete = new google.maps.places.Autocomplete(input, options);
+  </script>
+  <script>
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+      var place = [autocomplete.getPlace().geometry.location.lat(), autocomplete.getPlace().geometry.location.lng()];
+      $('#latitude').val(autocomplete.getPlace().geometry.location.lat());
+      $('#longitude').val(autocomplete.getPlace().geometry.location.lng());
+    });
+  </script>
 </body>
-
 </html>

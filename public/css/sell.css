@@ -1,3 +1,11 @@
-label,h1,h2 {
+label, h1, h2 {
   color: #4e2a84;
+}
+
+#sell-form {
+	margin-bottom: 1em;
+}
+
+.form-section {
+	margin-bottom: 2em;
 }
