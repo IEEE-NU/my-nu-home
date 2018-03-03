@@ -29,7 +29,8 @@ router.get('/listing/:id', (req, res) => {
 
 			listing.imageLinks = [];
 			for(let i = 0; i < listing.imageNumber; i++){
-				listing.imageLinks.push(`http://staging.my-nu-home-1513614055126.appspot.com.storage.googleapis.com/${id}/${i}`);
+				listing.imageLinks.push('http://' + (process.env.NODE_ENV !== 'production' ? 'staging.' : '') +
+					`my-nu-home-1513614055126.appspot.com.storage.googleapis.com/${id}/${i}`);
 			}
 
 			User.findById(listing.owner, (err,user) => {
