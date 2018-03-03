@@ -74,7 +74,7 @@ router.delete('/listing/:id', (req, res) => {
 	});
 });
 
-router.post('/listing', multer.array('images'), (req, res) => {
+router.post('/listing', multer.array('images'), (req, res, next) => {
 	console.log(req.body);
 	console.log(req.files);
 
@@ -92,31 +92,55 @@ router.post('/listing', multer.array('images'), (req, res) => {
 	}
 
 	req.body.imageNumber = req.files.length;
-
 	let listing = new Listing(req.body);
 	listing.owner = req.user.id;
 	
-	listing.save((err, listing) => {
-		if (err) {
-			console.error(err);
-			res.status(500).send('Failed to save listing: ' + err);
-		} else {
-			User.update(
-				{_id: req.user.id},
-				{$push: {listings: {
-					id: listing.id,
-					address: listing.address,
-				}}},
-				(err,message) => {
+	for (let i=0; i < req.files.length;i++){
+		const blob = image.file(listing._id + "/" + i.toString());
+		const blobStream = blob.createWriteStream({
+			metadata: {
+				contentType: req.files[i].mimetype,
+			}
+		});
+
+		blobStream.on('error', (err) => {
+			console.log("errorthing");
+			console.log(err);
+	    	next(err);
+	    	return;
+	  	});
+
+	  	blobStream.on('finish', () => {
+	  		if (i === req.files.length - 1) {
+		  		listing.save((err, listing) => {
 					if (err) {
-						res.status(500).json({error: err})
-					} else {
-						res.json({id: listing.id});
+						console.error(err);
+						res.status(500).send('Failed to save listing: ' + err);
+					} 
+					else {
+						User.update(
+							{_id: req.user.id},
+							{$push: {listings: {
+								id: listing.id,
+								address: listing.address,
+							}}},
+							(err, message) => {
+								if (err) {
+									res.status(500).json({error: err})
+								} else {
+									res.json({id: listing.id});
+								}
+							}
+						)
 					}
-				}
-			)
-		}
-	});
+				});
+		  	}
+  		});
+
+		blobStream.end(req.files[i].buffer);
+	}
+
+
 });
 
 router.get('/listing/:id/edit', login.checkAuth, (req, res) => {
