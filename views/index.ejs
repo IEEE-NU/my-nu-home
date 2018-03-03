@@ -4,6 +4,9 @@
 <head>
 	<% include partials/head %>
 	<title>My NU Home</title>
+	<link rel="stylesheet" href="css/index.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 </head>
 
 <body>
@@ -14,19 +17,37 @@
 			</div>
 		<% } %>
 	<% } %>
-	<div class="jumbotron jumbotron-fluid">
-	  <div class="container">
-	    <h1 class="display-3">My NU Home</h1>
-	    <p class="lead">Housing made simple.</p>
-	    <div class="row">
-	    	<div class="col-md-2">
-    			<a class="btn btn-primary btn-lg" href="/list" role="button">Buyers</a>
-    		</div>
-    		<div class="col-md-2">
-    			<a class="btn btn-primary btn-lg" href="/sell" role="button">Sellers</a>
-    		</div>
-    	</div>
-	  </div>
+
+	<div class="bg">
+		<div class="row">
+			<div class="col-md-6 offset-md-6 text-center">
+				<h1 id="My-Nu-Home"> My NU Home</h1>
+			</div>
+		</div>
+		<!-- <div id="text_buttons"> -->
+			<!-- <div class="row"> -->
+					<!-- <h1 id="My-Nu-Home"> My NU Home</h1> -->
+			<!-- </div> -->
+			<div class="row">
+				<div class="col-md-3 offset-md-6 text-center mb-3">
+					<a class="btn btn-primary btn-lg landing-button" href="/list" role="button">Buyers</a>
+				</div>
+				<div class="col-md-3 text-center">
+					<a class="btn btn-primary btn-lg landing-button" href="/sell" role="button">Sellers</a>
+				</div>
+			</div>
+		<!-- </div> -->
+	</div>
+
+	<div id="bottom-page">
+		<h1 style= "font-size: 48px">About My NU Home </h1>
+		<h3>What is My NU Home?</h3>
+		<p>My NU Home is a website to make leasing and subletting easier for Northwestern students.<p>
+		<h3>Who can use My NU Home?</h3>
+		<p>Only Northwestern students have access. You must have an @u.northwestern.edu email to create a listing on the site.</p>
+		<h3>Does using My NU Home cost money?</h3>
+		<p>No. My NU Home is free.</p>
+		<h5 style="font-size: 14px"class = "text-center">Made with <span id="heart"><i class="fa fa-heart" aria-hidden="true"></i></span> in Evanston, IL by Northwestern Students</h5>
 	</div>
 </body>
 </html>

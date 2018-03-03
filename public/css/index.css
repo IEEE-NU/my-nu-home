@@ -1,0 +1,62 @@
+body {
+	font-family: 'Montserrat';
+}
+
+.bg {
+	font-family: 'Montserrat', sans-serif;
+	height: 100vh;
+  background: url('/images/BackgroundImage.jpg') no-repeat center center fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.front-page-text {
+	position: relative;
+}
+
+#text_buttons {
+	position: absolute;
+	top: 15%;
+	right: 10%;
+}
+
+#My-Nu-Home {
+	font-size: 80px;
+	left: 30%;
+}
+
+.landing-button {
+	width: 60%;
+}
+
+/*#left-button {
+	left: 30%;
+	margin-right: 15%;
+	margin-left: 10%;
+	padding: 10px 40px;
+}
+
+#right-button {
+		padding: 10px 40px;
+}*/
+
+.btn {
+	background-color: #214d7d;
+	border-color: #214d7d;
+}
+
+.btn:hover {
+	background-color: white;
+	border-color: white;
+	color: #214d7d;
+}
+
+#bottom-page {
+	color: #214d7d;
+	margin-left: 5%;
+}
+
+#heart {
+	color: rgb(104, 076, 150);
+}

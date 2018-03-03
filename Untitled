@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+
+<!--TODO:be Consolidate this header html into a single file fragment to keep things DRY. 6 files share this exact same code-->
+
+<head>
+
+    <title>nextext</title>
+    <link rel="icon" href="/Users/Michael/Desktop/nextext/public/images/favicon.ico" type="image/x-icon" />
+
+    <meta charset="utf-8">
+    <meta name="description" content="nextext Front Page">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Michael Weinberger">
+    <meta name = "viewport" content="width=device-width, initial-scal=1">
+
+    <!--Bootstrap Latest compiled and minified CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!--Raley Font-->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+
+    <!--Font Awesome-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!--Front Page CSS File-->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/frontPage.css">
+
+    <!-- EJS In Text JS -->
+    <script type="text/javascript" src="ejs_production.js"></script>
+
+
+</head>
+
+<html lang="en">
+
+    <body>
+
+        <div class="container-fluid topHalf">
+
+            <div class="row topbar">
+                <% if(!login){ %>
+                    <a href="/users/login" class="button_1 login col-md-2 pull-right" role="button">Login</a>
+                    <a href="/users/signup" class="button_1 signUp col-md-2 pull-right" role="button">Sign Up</a>
+                <% } %>
+
+                <% if(login){ %>
+                    <a href="/users/profile" id="profile"><i class="fa fa-user-circle fa-4x" aria-hidden="true"></i></a>
+                <% } %>
+
+            </div>
+
+            <div class="row">
+                <h1 class="welcometext text-center">Welcome to nex<span class = "text"><strong>text.</strong></span></h1>
+                <h2 class="text-center welcome_subtext">College is expensive. We make it cheaper.</h2>
+            </div>
+            <div class = "row">
+                <a href="/textbooks" class="text-center button_2 buy col-md-2" role="button">BUY</a>
+                <a href="/sellPage" class="text-center button_2 sell col-md-2" role="button">SELL</a>
+            </div>
+        </div>
+
+        <div class = "container-fluid FAQSection">
+
+            <div class = "row col-md-7">
+
+                <h1 class="faq">FAQ's</h1>
+
+            </div>
+
+            <div class="row col-md-7">
+                <h1 class="question">What is nextext?</h1>
+                <p class="answer">nextext is an online textbook marketplace that connects buyers and sellers to facilitate textbook transactions between students.
+            </div>
+
+            <div class="row col-md-7">
+                <h1 class = "question">Why should I use nextext?</h1>
+                <p class="answer">Instead of having to pay premium prices straight from the bookstore, nextext makes it really easy to buy them directly from other students. This way, the seller gets rid of a book that has no value to them, and the buyer gets book for a steep discount. As this cycle goes on, buyers and sellers will be spending next to nothing for their textbooks.</p>
+
+            </div>
+
+            <div class="row col-md-7">
+                <h1 class="question">How does it work?</h1>
+                <p class="answer">If you want to sell a textbook, all you have to do is login, go to your profile, and click "add a textbook." If you want to buy a textbook, all you have to do is login, either search for the textbook (through ISBN, name, author, etc.) or find it through the classes dropdown menu, and then contact the seller.</p>
+            </div>
+
+            <div class="row col-md-7">
+
+                <h1 class="question">Is it free to use?</h1>
+                <p class="answer">Of course it's free to use! We want to make it as easy as possible for students to buy textbooks.</p>
+
+            </div>
+
+        </div>
+
+        <div class = "container-fluid contact">
+
+            <div class = "row">
+                <h2 class="contactText">Contact Us!</h2>
+            </div>
+            <div class = "row">
+                <span class = "col-md-3"></span>
+                <div class = "col-md-2">
+                    <h5 class = "text-center">Facebook <i class="fa fa-facebook" aria-hidden="true"></i></h5>
+                    <h5 class = "text-center">Twitter <i class="fa fa-twitter" aria-hidden="true"></i></h5>
+                    <h5 class = "text-center">Instagram <i class="fa fa-instagram" aria-hidden="true"></i></h5>
+                </div>
+
+                <div class = "col-md-2">
+                    <h5 class = "text-center">Email <i class="fa fa-envelope" aria-hidden="true"></i></h5>
+                    <h5 class = "text-center">Account Info <i class="fa fa-info" aria-hidden="true"></i></h5>
+                    <h5 class = "text-center">Sell a Textbook</h5>
+                </div>
+
+                <div class = "col-md-2">
+                    <h5 class = "text-center">Join Our Team! </h5>
+                    <h5 class = "text-center">Questions <i class="fa fa-question-circle" aria-hidden="true"></i></h5>
+                    <h5 class = "text-center">Terms and Conditions </h5>
+                </div>
+            </div>
+
+        </div>
+
+        <div class = "container-fluid">
+            <div class = "row bottomBar">
+                <h5 class = "text-center">| Made with <i class="fa fa-heart-o" aria-hidden="true"></i> in College Park, Maryland |</h5>
+            </div>
+        </div>
+
+    </body>
+
+</html>
