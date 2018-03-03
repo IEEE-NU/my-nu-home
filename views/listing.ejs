@@ -47,18 +47,18 @@
             <%= moment(startPeriod).format('MM/DD/YYYY'); %>
             <%= endPeriod ? ('to ' + moment(endPeriod).format('MM/DD/YYYY')) : '' %>
           </li>
-          <li class="list-group-item">Preferred gender:
-            <% if (genderPreferred == 'male') { %>
-              <b>Male</b>
-            <% } else if (genderPreferred == 'female') { %>
-              <b>Female</b>
-            <% } else if (genderPreferred == 'other') { %>
-              <b>Other (See description or contact owner)</b>
-            <% } else { %>
-              <b>No preference</b>
-            <% } %>
-          </li>
-          <% if (saleType == 'sublet') { %>
+          <% if (saleType === 'sublet') { %>
+            <li class="list-group-item">Preferred gender:
+              <% if (genderPreferred == 'male') { %>
+                <b>Male</b>
+              <% } else if (genderPreferred == 'female') { %>
+                <b>Female</b>
+              <% } else if (genderPreferred == 'other') { %>
+                <b>Other (See description or contact owner)</b>
+              <% } else { %>
+                <b>No preference</b>
+              <% } %>
+            </li>
             <li class="list-group-item"># of Existing Occupants: <%= occupants ? occupants : 'Not Specified' %></li>
             <li class="list-group-item">Vacancies: <%= vacancies ? vacancies : 'Not Specified' %></li>
           <% } %>

@@ -15,11 +15,13 @@
 					<div id="<%= docs[i].id %>" class="list-group">
 					  <a href="listing/<%= docs[i].id %>" class="list-group-item list-group-item-action flex-column align-items-start">
 					    <div class="d-flex w-100 justify-content-between">
-					      <h5 class="price mb-1">$<%= docs[i].price%></h5>
-					      <small><%= moment(docs[i].startPeriod).format('LL');%></small>
+					      <h5 class="price mb-1" style="text-transform: capitalize;">$<%= docs[i].price%> - <%= docs[i].saleType %></h5>
+					      <small>Starting: <%= moment(docs[i].startPeriod).format('LL');%></small>
 					    </div>
 					    <p class="address mb-1"><%= docs[i].address%></p>
-					    <small>Female Requested</small>
+					    <% if (docs[i].saleType === 'sublet') { %>
+							<small style="text-transform: capitalize;">Gender Preference: <%= docs[i].genderPreferred %></small>
+					    <% } %>
 					  </a>
 					</div>
 					<% } %>

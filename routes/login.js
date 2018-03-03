@@ -8,7 +8,7 @@ passport.use(new GoogleStrategy({
     clientID: config.google.id,
     clientSecret: config.google.secret,
     callbackURL: process.env.NODE_ENV === 'production'
-      ? 'https://my-nu-home-1513614055126.appspot.com/login/callback'
+      ? 'https://mynuho.me/login/callback'
       : 'http://localhost:8080/login/callback'
   },
   function(accessToken, refreshToken, profile, done) {
