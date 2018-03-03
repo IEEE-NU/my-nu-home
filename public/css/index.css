@@ -5,10 +5,10 @@ body {
 .bg {
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
-    background: url('/images/BackgroundImage.jpg') no-repeat center center fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background: url('/images/BackgroundImage.jpg') no-repeat center center fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .front-page-text {
@@ -26,7 +26,11 @@ body {
 	left: 30%;
 }
 
-#left-button {
+.landing-button {
+	width: 60%;
+}
+
+/*#left-button {
 	left: 30%;
 	margin-right: 15%;
 	margin-left: 10%;
@@ -35,7 +39,7 @@ body {
 
 #right-button {
 		padding: 10px 40px;
-}
+}*/
 
 .btn {
 	background-color: #214d7d;
