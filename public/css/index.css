@@ -26,15 +26,8 @@ body {
 	left: 30%;
 }
 
-#left-button {
-	left: 30%;
-	margin-right: 15%;
-	margin-left: 10%;
-	padding: 10px 40px;
-}
-
-#right-button {
-		padding: 10px 40px;
+.landing-button {
+	width: 60%;
 }
 
 .btn {
@@ -50,7 +43,11 @@ body {
 
 #bottom-page {
 	color: #214d7d;
-	margin-left: 5%;
+	margin-bottom: 2em;
+}
+
+#faq {
+	padding-bottom: 1em;
 }
 
 #heart {
