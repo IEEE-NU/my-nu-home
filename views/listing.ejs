@@ -4,11 +4,12 @@
    	<% include partials/head %>
     <link rel="stylesheet"  href="/css/listing.css">
     <title><%= address %> - <%= moment(startPeriod).format('MMM YYYY'); %></title>
+    <link rel="stylesheet" type="text/css" href="/css/listing.css">
 </head>
 <body>
   <% include partials/nav %>
   <div class="container">
-    <h1><%= address %></h1>
+    <h1 class="address"><%= address %></h1>
     <div class="row">
       <% if (imageLinks.length > 0) { %>
         <div class="col-md-6 mb-3">
