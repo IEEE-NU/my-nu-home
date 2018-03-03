@@ -10,10 +10,10 @@
 <body>
   <% include partials/nav %>
   <div class="container mt-2">
-    <h1>Let's get started.</h1>
+    <h1 style="font-size: 48px;">Let's Get Started.</h1>
     <form id="sell-form" action="/listing" method="post">
       <div class="form-section">
-        <h2>The Basics</h2>
+        <h2>1. The Basics</h2>
         <div class="form-row">
           <div class="form-group col-md-3">
             <label for="saleType" class="col-form-label">Lease or Sublet?</label>
@@ -76,7 +76,7 @@
       </div>
 
       <div id="sublet-details" class="form-section">
-        <h2>Sublet Details</h2>
+        <h3>Sublet Details</h3>
         <div class="form-row">
           <div id="occupants-field" class="form-group col-md-3">
             <label for="occupants">Total # of occupants</label>
@@ -102,7 +102,7 @@
       </div>
 
       <div class="form-section">
-        <h2>$$$</h2>
+        <h2>2. Cost</h2>
         <div class="form-row">
           <div class="form-group col-md-2">
             <label class="col-form-label" for="price">Rent Price</label>
@@ -113,6 +113,10 @@
           <input class="form-check-input" type="checkbox" name="negotiable" id="negotiable">
           <label for="negotiable">Price negotiable</label>
         </div>
+      </div>
+
+      <div class="form-section">
+        <h2>3. Utilities</h2>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" name="water" id="water">
           <label for="water">Water included</label>
@@ -136,7 +140,7 @@
       </div>
 
       <div id="checkboxes" class="form-section">
-        <h2>Miscellaneous</h2>
+        <h2>4. Miscellaneous</h2>
         <div class="form-row">
           <div class="form-group col-md-3">
             <label for="parking">Parking available</label>
@@ -149,7 +153,7 @@
           <div id="parkingCost-field" class="form-group col-md-3">
             <label for="parkingCost">Parking cost (optional)</label>
             <input class="form-control" id="parkingCost" name="parkingCost" type="number" placeholder="$/month">
-          </div>        
+          </div>
         </div>
 
         <div class="form-row">
@@ -163,7 +167,7 @@
           <div id="petsCost-field" class="form-group col-md-3">
             <label for="petsCost">Pets cost (optional)</label>
             <input class="form-control" id="petsCost" name="petsCost" type="number" placeholder="$/month per pet" min="0">
-          </div>        
+          </div>
         </div>
 
         <div class="form-check">
@@ -177,20 +181,20 @@
       </div>
 
       <div class="form-section">
-        <h2>Description</h2>
+        <h2>5. Description</h2>
         <div class="form-group">
           <label for="images">Add photos (up to 5, no larger than 25MB each, optional)</label>
           <input type="file" class="form-control-file" name="images" id="images" multiple>
         </div>
         <div class="form-group">
           <label for="blurb">Describe your place... (optional)</label>
-          <textarea class="form-control" id="blurb" name="blurb" rows="3" placeholder="Amenities, special circumstances, places nearby..." aria-describedby="blurbHelp"></textarea>
+          <textarea class="form-control" id="blurb" name="blurb" rows="3" placeholder="Amenities, special circumstances, square footage, places nearby..." aria-describedby="blurbHelp"></textarea>
           <small id="blurbHelp" class="form-text text-muted">
             300 characters maximum
           </small>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Post Listing</button>
+      <button id="submit-button" type="submit" class="btn btn-primary">Post Listing</button>
     </form>
   </div>
 

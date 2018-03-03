@@ -1,3 +1,8 @@
+body {
+  font-family: 'Montserrat';
+	color: #214d7d;
+}
+
 .whole-viewport {
 	display: flex;
 	flex-direction: column;
