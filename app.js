@@ -9,6 +9,8 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const config = require('./config.js');
 
+require('./models/image.js');
+
 // Set the template engine to ejs and the views directory
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

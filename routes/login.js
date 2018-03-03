@@ -53,12 +53,12 @@ function isEligible(profile) {
 }
 
 passport.serializeUser(function(user, done) {
-	console.log(`Serializing user ${user.id}`);
+	// console.log(`Serializing user ${user.id}`);
 	done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-	console.log(`Deserializing user ${id}`);
+	// console.log(`Deserializing user ${id}`);
 	User.findById(id, (err, user) => {
 		if (err) { console.error(err); }
 		done(err, user);

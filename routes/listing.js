@@ -2,9 +2,17 @@ const Listing = require('../models/listing.js');
 const moment = require('moment');
 const login = require('../routes/login.js');
 const User = require('../models/user.js');
+const image = require('../models/image.js');
+const Multer = require('multer');
 let router = require('express').Router();
 
 const utilities = ['water','electricity','gas','wifi','heat'];
+const multer = Multer({
+  storage: Multer.memoryStorage(),
+  limits: {
+    fileSize: 25 * 1024 * 1024 // no larger than 25mb
+  }
+});
 
 router.get('/listing/:id', (req, res) => {
 	let id = req.params.id;
@@ -19,18 +27,12 @@ router.get('/listing/:id', (req, res) => {
 				return;
 			}
 
-			if (req.user) {
-				if (req.user.id == listing.owner.toString()){
-					listing.isOwner = true;
-				}
-				else {
-					listing.isOwner = false;
-				}
-			}
-			else {
-				listing.isOwner = false;
+			listing.imageLinks = [];
+			for(let i = 0; i < listing.imageNumber; i++){
+				listing.imageLinks.push(`http://staging.my-nu-home-1513614055126.appspot.com.storage.googleapis.com/${id}/${i}`);
 			}
 
+			listing.isOwner = req.user && req.user.id == listing.owner.toString();
 			listing.moment = moment;
 			listing.active = '';
 			listing.loggedIn = req.user !== undefined;
@@ -72,50 +74,73 @@ router.delete('/listing/:id', (req, res) => {
 	});
 });
 
-router.post('/listing', (req,res) => {
-	// console.log(req.body);
+router.post('/listing', multer.array('images'), (req, res, next) => {
+	console.log(req.body);
+	console.log(req.files);
+
 	//TODO: Extra validation.
 	req.body.loc = {
 		type: 'Point',
 		coordinates: [req.body.latitude, req.body.longitude]
 	};
+
 	req.body.utilities = [];
 	for (let i=0; i< utilities.length; i++) {
 		if (req.body[utilities[i]] == 'on') {
 			req.body.utilities.push(utilities[i]);
 		}
-	};
+	}
 
+	req.body.imageNumber = req.files.length;
 	let listing = new Listing(req.body);
-	listing.loc = {
-		type: 'Point',
-		coordinates: [ req.body.latitude, req.body.longitude ],
-	};
-
-	console.log(req.user);
 	listing.owner = req.user.id;
+	
+	for (let i=0; i < req.files.length;i++){
+		const blob = image.file(listing._id + "/" + i.toString());
+		const blobStream = blob.createWriteStream({
+			metadata: {
+				contentType: req.files[i].mimetype,
+			}
+		});
 
-	listing.save((err, listing) => {
-		if (err) {
-			console.error(err);
-			res.status(500).send('Failed to save listing: ' + err);
-		} else {
-			User.update(
-				{_id: req.user.id},
-				{$push: {listings: {
-					id: listing.id,
-					address: listing.address,
-				}}},
-				(err,message) => {
+		blobStream.on('error', (err) => {
+			console.log("errorthing");
+			console.log(err);
+	    	next(err);
+	    	return;
+	  	});
+
+	  	blobStream.on('finish', () => {
+	  		if (i === req.files.length - 1) {
+		  		listing.save((err, listing) => {
 					if (err) {
-						res.status(500).json({error: err})
-					} else {
-						res.json({id: listing.id});
+						console.error(err);
+						res.status(500).send('Failed to save listing: ' + err);
+					} 
+					else {
+						User.update(
+							{_id: req.user.id},
+							{$push: {listings: {
+								id: listing.id,
+								address: listing.address,
+							}}},
+							(err, message) => {
+								if (err) {
+									res.status(500).json({error: err})
+								} else {
+									res.json({id: listing.id});
+								}
+							}
+						)
 					}
-				}
-			)
-		}
-	});
+				});
+		  	}
+  		});
+
+		blobStream.end(req.files[i].buffer);
+	}
+
+
 });
 
 router.get('/listing/:id/edit', login.checkAuth, (req, res) => {
