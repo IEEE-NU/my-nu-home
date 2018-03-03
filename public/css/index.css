@@ -22,8 +22,19 @@ body {
 }
 
 #My-Nu-Home {
-	font-size: 72px;
-	text-align: center;
+	font-size: 80px;
+	left: 30%;
+}
+
+#left-button {
+	left: 30%;
+	margin-right: 15%;
+	margin-left: 10%;
+	padding: 10px 40px;
+}
+
+#right-button {
+		padding: 10px 40px;
 }
 
 .btn {
@@ -35,4 +46,13 @@ body {
 	background-color: white;
 	border-color: white;
 	color: #214d7d;
+}
+
+#bottom-page {
+	color: #214d7d;
+	margin-left: 5%;
+}
+
+#heart {
+	color: rgb(104, 076, 150);
 }
