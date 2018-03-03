@@ -56,7 +56,7 @@
             <li class="list-group-item">Vacancies: <%= vacancies ? vacancies : 'Not Specified' %></li>
           <% } %>
           <% if (!isOwner) { %>
-            <li class="list-group-item"><a href="mailto:seller@example.com" target="_top">Contact Seller</a>
+            <li class="list-group-item"><a href="mailto:<%= email %>" target="_top">Contact Seller</a>
           <% } else { %>
             <!-- TODO: Ask for confirmation before deleting. -->
             <li class="list-group-item">No longer available? <a href="#" id="delete-listing">Remove this listing.</a></li>

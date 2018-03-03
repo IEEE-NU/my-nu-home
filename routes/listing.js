@@ -32,12 +32,22 @@ router.get('/listing/:id', (req, res) => {
 				listing.imageLinks.push(`http://staging.my-nu-home-1513614055126.appspot.com.storage.googleapis.com/${id}/${i}`);
 			}
 
-			listing.isOwner = req.user && req.user.id == listing.owner.toString();
-			listing.moment = moment;
-			listing.active = '';
-			listing.loggedIn = req.user !== undefined;
+			User.findById(listing.owner, (err,user) => {
+				if (err) {
+					console.error(err);
+					console.log(`Error retrieving listing with ID ${id}`);
+					res.status(500).send("Error occurred when attempting to retrieve listing.");
+				}
+				else {
+					listing.email = user.email;
+					listing.isOwner = req.user && req.user.id == listing.owner.toString();
+					listing.moment = moment;
+					listing.active = '';
+					listing.loggedIn = req.user !== undefined;
+					res.render('../views/listing', listing);
+				}
 
-			res.render('../views/listing', listing);
+			});
 		}
 	});
 });
@@ -91,17 +101,27 @@ router.post('/listing', multer.array('images'), (req, res, next) => {
 		}
 	}
 
-	req.body.imageNumber = req.files.length;
+	if (!req.body.imageNumber){
+		req.body.imageNumber = 0;
+	}
+
+	if (!req.body.negotiable){
+		req.body.negotiable = false;
+	}
+	
 	let listing = new Listing(req.body);
 	listing.owner = req.user.id;
 	
-	for (let i=0; i < req.files.length;i++){
-		const blob = image.file(listing._id + "/" + i.toString());
-		const blobStream = blob.createWriteStream({
-			metadata: {
-				contentType: req.files[i].mimetype,
-			}
-		});
+	if (req.files){
+		req.body.imageNumber = req.files.length;
+		for (let i=0; i < req.files.length;i++){
+			const blob = image.file(listing._id + "/" + i.toString());
+			const blobStream = blob.createWriteStream({
+				metadata: {
+					contentType: req.files[i].mimetype,
+				}
+			});
+		}
 
 		blobStream.on('error', (err) => {
 			console.log("errorthing");
@@ -110,38 +130,45 @@ router.post('/listing', multer.array('images'), (req, res, next) => {
 	    	return;
 	  	});
 
-	  	blobStream.on('finish', () => {
-	  		if (i === req.files.length - 1) {
-		  		listing.save((err, listing) => {
-					if (err) {
-						console.error(err);
-						res.status(500).send('Failed to save listing: ' + err);
-					} 
-					else {
-						User.update(
-							{_id: req.user.id},
-							{$push: {listings: {
-								id: listing.id,
-								address: listing.address,
-							}}},
-							(err, message) => {
-								if (err) {
-									res.status(500).json({error: err})
-								} else {
-									res.json({id: listing.id});
-								}
-							}
-						)
-					}
-				});
-		  	}
-  		});
+	  	 {
+	  		blobStream.on('finish', () => {
+	  			if (i === req.files.length - 1) {
+		  			savelisting(listing, res, req);
+		  		}
+  			})};
 
 		blobStream.end(req.files[i].buffer);
 	}
-
-
+	else {
+		savelisting(listing, res, req);
+	}
 });
+
+
+function savelisting(listing, res, req){
+	listing.save((err, listing) => {
+		if (err) {
+			console.error(err);
+			res.status(500).send('Failed to save listing: ' + err);
+		} 
+		else {
+			User.update(
+				{_id: req.user.id},
+				{$push: {listings: {
+					id: listing.id,
+					address: listing.address,
+				}}},
+				(err, message) => {
+					if (err) {
+						res.status(500).json({error: err})
+					} else {
+						res.json({id: listing.id});
+					}
+				}
+			)
+		}
+	})};
+
 
 router.get('/listing/:id/edit', login.checkAuth, (req, res) => {
 	res.status(500).send('unimplemented');
